@@ -1,46 +1,111 @@
-# Getting Started with Create React App
+<div align="center" style="display:flex;flex-direction:column;">
+  <a href="https://openchakra.app">
+    <img src="./public/images/github-banner.png" alt="Openchakra: Visual editor for Chakra UI." />
+  </a>
+  <h3>Visual Editor for Chakra UI</h3>
+</div>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+OpenChakra is a visual editor for the best component library in town: [Chakra UI](https://chakra-ui.com) 🤗. Quickly draft components with the simple drag and drop UI.
 
-## Available Scripts
+👉 [https://openchakra.app](https://openchakra.app)
 
-In the project directory, you can run:
+## Features
 
-### `yarn start`
+- 🎨 Drag and drop [Chakra UI](https://chakra-ui.com/getting-started) components
+- 💅 Preset components
+- 👀 Live props editing and styling
+- ⚛️ Production-ready code
+- 🎈 CodeSandbox export
+- 🔮 Undo/redo edit
+- 💽 Localstorage sync
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+[![Screenshot](./public/images/screenshot.png)](https://openchakra.app)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Getting started
 
-### `yarn test`
+### Builder mode
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The Builder mode adds extra padding/border to ease components selection (like containers).
 
-### `yarn build`
+> 💡Toggle the Builder mode with the `b` shortcut
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Code panel
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Toggle the code panel for viewing the JSX/React code of your components. You can even export your code directly to CodeSandbox!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+> 💡Toggle the Code panel with the `c` shortcut
 
-### `yarn eject`
+### Components panel
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Drag any component from the left hand panel into this editor. Then start interacting with them.
+You can drag a preset: it's a group of components (like Alert). Just drop a preset to easily setup a complex component!
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Inspector
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+**Update props & style**
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+On the right hand-side, you can find the inspector panel. You will find the tools to edit the component's props and style.
 
-## Learn More
+**Delete, reset and documentation**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Reach the yellow bar on the top to delete, reset and access the Chakra documentation of each component.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+**Sort components**
+
+By clicking on a component containing children, you will see a Children panel appearing on the right. It enables sorting the children.
+
+### Editor Shortcuts
+
+| Shortcut         | Description               |
+| ---------------- | ------------------------- |
+| `cmd+Z` `ctrl+Z` | Undo last action          |
+| `cmd+Y` `ctrl+y` | Redo action               |
+| `cmd+D` `ctrl+d` | Duplicate component       |
+| `del`            | Delete selected component |
+| `c`              | Toggle Code panel         |
+| `b`              | Toggle Builder mode       |
+| `p`              | Select parent component   |
+| `Esc`            | Unselect component        |
+
+## Roadmap
+
+- More Chakra UI components integration
+- Components copy
+- Props panel improvements
+- Code generation improvements
+- Dark mode support
+- Custom presets
+- Custom theme
+- Handle PseudoBox state (hover, active…)
+- Fix bugs 🧨
+- Support other UI (Material, Reakit...)
+
+## Contributors
+
+### Code Contributors
+
+This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
+<a href="https://github.com/premieroctet/openchakra/graphs/contributors"><img src="https://opencollective.com/openchakra/contributors.svg?width=890&button=false" /></a>
+
+### Financial Contributors
+
+Become a financial contributor and help us sustain our community. [[Contribute](https://opencollective.com/openchakra/contribute)]
+
+#### Individuals
+
+<a href="https://opencollective.com/openchakra"><img src="https://opencollective.com/openchakra/individuals.svg?width=890"></a>
+
+#### Organizations
+
+Support this project with your organization. Your logo will show up here with a link to your website. [[Contribute](https://opencollective.com/openchakra/contribute)]
+
+<a href="https://opencollective.com/openchakra/organization/0/website"><img src="https://opencollective.com/openchakra/organization/0/avatar.svg"></a>
+<a href="https://opencollective.com/openchakra/organization/1/website"><img src="https://opencollective.com/openchakra/organization/1/avatar.svg"></a>
+<a href="https://opencollective.com/openchakra/organization/2/website"><img src="https://opencollective.com/openchakra/organization/2/avatar.svg"></a>
+<a href="https://opencollective.com/openchakra/organization/3/website"><img src="https://opencollective.com/openchakra/organization/3/avatar.svg"></a>
+<a href="https://opencollective.com/openchakra/organization/4/website"><img src="https://opencollective.com/openchakra/organization/4/avatar.svg"></a>
+<a href="https://opencollective.com/openchakra/organization/5/website"><img src="https://opencollective.com/openchakra/organization/5/avatar.svg"></a>
+<a href="https://opencollective.com/openchakra/organization/6/website"><img src="https://opencollective.com/openchakra/organization/6/avatar.svg"></a>
+<a href="https://opencollective.com/openchakra/organization/7/website"><img src="https://opencollective.com/openchakra/organization/7/avatar.svg"></a>
+<a href="https://opencollective.com/openchakra/organization/8/website"><img src="https://opencollective.com/openchakra/organization/8/avatar.svg"></a>
+<a href="https://opencollective.com/openchakra/organization/9/website"><img src="https://opencollective.com/openchakra/organization/9/avatar.svg"></a>
