@@ -38,10 +38,10 @@ const meta = {
 
 export default meta;
 // type Story = StoryObj<typeof meta>;
+type Story = StoryObj<any>;
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const SlidingBlackAndGrey: any = {
-  // component: Scene,
   args: {
     show: false,
     variation: 'sliding',
@@ -50,12 +50,26 @@ export const SlidingBlackAndGrey: any = {
 };
 
 export const SlidingColors: Story = {
-  component: Scene,
   args: {
     show: false,
     variation: 'sliding',
     direction: 'left',
     primaryColor: 'red',
     secondaryColor: 'brown',
+  },
+};
+
+export const Scaling: Story = {
+  args: {
+    show: false,
+    variation: 'scaling',
+  },
+};
+
+export const Fragmented: Story = {
+  args: {
+    show: false,
+    variation: 'fragmented',
+    autoChange: false
   },
 };
