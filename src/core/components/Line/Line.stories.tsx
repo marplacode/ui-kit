@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
+import { HiddenBox } from '../HiddenBox';
 import { Line } from './Line';
 
 
@@ -15,7 +16,7 @@ const Scene = (props:any) => {
 }
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
-const meta = {
+const meta:any = {
   title: 'Core/Components/Line',
   component: Scene,
   parameters: {
@@ -31,10 +32,11 @@ const meta = {
   argTypes: {
     variation: { options: ['sliding','colorchange'] },
     direction: { options: ['left','top','intercalated'] },
+    // appear:  true,
   },
   // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args
   args: { onClick: (a:any) => console.log(a) },
-} satisfies Meta<typeof Line>;
+}  satisfies Meta<typeof Line>;
 
 export default meta;
 // type Story = StoryObj<typeof meta>;
@@ -50,3 +52,12 @@ export const Normal: any = {
     // direction: 'left',
   },
 };
+
+export const Appearing: any = {
+  args: {
+    show:true,
+    variation: 'vertical',
+
+  },
+};
+

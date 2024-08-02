@@ -3011,6 +3011,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fontsource-variable/raleway@npm:^5.0.20":
+  version: 5.0.20
+  resolution: "@fontsource-variable/raleway@npm:5.0.20"
+  checksum: 8ca38fade0008f16c2da2fd87833955f5f9494f884c2b2152d06847ae2c5ffed2b204304edbbc5a0205da0ceb93981071460caa445afd1d01f1d505b70021afb
+  languageName: node
+  linkType: hard
+
+"@fontsource/poppins@npm:^5.0.14":
+  version: 5.0.14
+  resolution: "@fontsource/poppins@npm:5.0.14"
+  checksum: 99e827d949f30a60ec81127e12e99d98db6fb18c2fdcf7e59fcd42f67ae006ddc65da684c4eb2d32a5488ec388f143a8d3a044a3364fd4d6fd30426c85bcdb35
+  languageName: node
+  linkType: hard
+
 "@humanwhocodes/config-array@npm:^0.11.14":
   version: 0.11.14
   resolution: "@humanwhocodes/config-array@npm:0.11.14"
@@ -3127,6 +3141,8 @@ __metadata:
     "@chromatic-com/storybook": ^1.6.1
     "@emotion/react": ^11.11.4
     "@emotion/styled": ^11.11.5
+    "@fontsource-variable/raleway": ^5.0.20
+    "@fontsource/poppins": ^5.0.14
     "@react-spring/web": ^9.7.3
     "@storybook/addon-essentials": ^8.2.3
     "@storybook/addon-interactions": ^8.2.3

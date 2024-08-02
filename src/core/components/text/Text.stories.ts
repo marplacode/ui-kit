@@ -50,3 +50,4 @@ export const Primary: any = {
     show: true
   },
 };
+

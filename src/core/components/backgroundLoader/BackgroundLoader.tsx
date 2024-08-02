@@ -40,8 +40,8 @@ const useMaxZIndex = () => {
 
 export interface BackgroundLoaderProps { as: string }
 
-export const BackgroundLoader = ({ show = true, autoChange = true, delay = 2000, repeat = 2, variation='sliding', ...props }) => {
-  const [isLoaded, setIsLoaded] = useState(false);
+export const BackgroundLoader = ({ show = true, initialShow = true, autoChange = true, delay = 2000, repeat = 2, variation='sliding', ...props }) => {
+  const [isLoaded, setIsLoaded] = useState(!initialShow);
   const maxIndex = useMaxZIndex()
   const [repeatCounter, setRepeatCounter] = useState(0);
 console.log('M<AXXXX',maxIndex)

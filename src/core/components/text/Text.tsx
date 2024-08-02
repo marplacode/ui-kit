@@ -2,8 +2,9 @@
 // import { Box, Text as CT } from '@chakra-ui/react';
 // import { useSpring, animated } from '@react-spring/web';
 
-import { BoxProps,Box, chakra } from "@chakra-ui/react";
-import { motion,} from "framer-motion";
+import { BoxProps, Box,Text as CText, chakra } from "@chakra-ui/react";
+import { motion } from "framer-motion";
+import { StaggerBox } from "../StaggerBox";
 
 // export const Text = ({ isLoading = true, text = 'Loading...', ...props }) => {
 //   const [isLoaded, setIsLoaded] = useState(false);
@@ -51,7 +52,7 @@ interface MotionTextProps extends BoxProps {
   duration?: number;
   easing?: string;
   animations?: { [key: string]: LetterAnimation }; // Object mapping letters to animations
-} 
+}
 
 const MotionBox = motion(chakra.div);
 
@@ -59,17 +60,17 @@ export const Text: React.FC<any> = ({
   text,
   delay = 0.1,
   duration = 0.8,
-  easing = 'cubic-bezier(0.68, -0.55, 0.27, 1.55)',
+  easing = "cubic-bezier(0.76, 0, 0.2, 1)", //cubic-bezier(0.76, 0, 0.2, 1)
   letters: lettersConfig = {}, // Default to empty object if not provided
   show = true,
   ...props
 }) => {
-  const letters = text.split('');
+  const letters = text.split("");
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
-      opacity: 1,
+      // opacity: 1,
       transition: {
         staggerChildren: delay,
       },
@@ -78,7 +79,7 @@ export const Text: React.FC<any> = ({
 
   const getLetterVariants = (letter: string) => {
     const animation = lettersConfig[letter] || {};
-    console.log('anim',animation,letter)
+    console.log("anim", animation, letter);
     return {
       hidden: {
         y: animation.y !== undefined ? animation.y : -50,
@@ -93,7 +94,7 @@ export const Text: React.FC<any> = ({
           duration,
           ease: easing,
         },
-        ...animation
+        ...animation,
       },
     };
   };
@@ -102,7 +103,7 @@ export const Text: React.FC<any> = ({
     <chakra.div overflow="hidden" display="inline-block" {...props}>
       <MotionBox
         initial="hidden"
-        animate={show ?"visible" : 'hidden' }
+        animate={show ? "visible" : "hidden"}
         variants={containerVariants}
         display="flex"
       >
