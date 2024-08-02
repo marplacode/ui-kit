@@ -70,6 +70,7 @@ export const Fragmented: Story = {
   args: {
     show: false,
     variation: 'fragmented',
-    autoChange: false
+    direction: "vertical",
+    autoChange: true
   },
 };

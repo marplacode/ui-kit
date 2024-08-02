@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Box } from  '@chakra-ui/react';
 import { useSpring, animated } from '@react-spring/web';
 
-export const ScalingVariation = ({ show = true, ...props }) => {
+export const ScalingVariation = ({ show = true, zIndex,...props }) => {
   const bg1Spring = useSpring({
     transform: show ? 'scale(0)' : 'scale(1)',
     config: { duration: 1600, easing: t => (1 - (1 - t) ** 4) },
@@ -22,8 +22,7 @@ export const ScalingVariation = ({ show = true, ...props }) => {
       left="0"
       width="100%"
       height="100%"
-      zIndex="11"
-
+      zIndex={zIndex}
       {...props}
     >
       <animated.div

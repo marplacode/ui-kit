@@ -22,12 +22,14 @@ export const SlidingSideVariation = ({  show = true,
     transform: getTransform(show, direction, 1),
     config: { duration: 1600, easing: t => (1 - (1 - t) ** 4) },
     delay: 800,
+    onRest: props.onAnimationEnd
   });
 
   const bg2Spring = useSpring({
     transform: getTransform(show, direction, 2),
     config: { duration: 1600, easing: t => (1 - (1 - t) ** 4) },
-    delay: 500,
+    delay: 500, 
+    // onRest: props.onAnimationEnd
   });
 
   return (
