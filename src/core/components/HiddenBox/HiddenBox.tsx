@@ -1,6 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import { motion, useInView } from "framer-motion";
-import { useLayoutEffect, useMemo, useRef, useState } from "react";
+import { FC, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { HiddenBoxProps } from "../../types/HiddenBox";
 
 const MotionBox = motion(Box);
 
@@ -11,7 +12,7 @@ export const EASING_VALUES_1 = [0.38, -0.01, 0.58, 1];
 
 const showPosition = { x: 0, y: 0 };
 
-export const HiddenBox = ({
+export const HiddenBox: FC<HiddenBoxProps> = ({
   children,
   animationDisabled = false,
   show = true,
@@ -21,6 +22,7 @@ export const HiddenBox = ({
   duration = 0.8,
   height: initialHeight = null,
   easingValues = CUBIC_MOTION_FUNCTION_1,
+  isInViewConfig = {}
 }) => {
   const initialPosition = useMemo(() => {
     switch (direction) {
@@ -46,8 +48,7 @@ export const HiddenBox = ({
   }, [direction]);
   const [{ width, height }, setDimensions] = useState({ width: 0, height: 0 });
   const childRef = useRef(null);
-  const visibleRef = useRef(null);
-  const isInView = useInView(visibleRef);
+  const isInView = useInView(childRef, isInViewConfig);
 
   const calculateAnimation = useMemo(() => {
     if (animationDisabled) {
@@ -74,7 +75,6 @@ export const HiddenBox = ({
       display="flex"
       width={width}
       height={initialHeight}
-      ref={visibleRef}
     >
       <MotionBox
         display="flex"

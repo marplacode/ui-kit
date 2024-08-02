@@ -31,7 +31,7 @@ const Scene = (props: any) => {
       <AnimatedText show={false} timingGap={props.timingGap} fontSize={"8rem"} fontWeight="600" direction="left" easingValues={EASING_VALUES_1}>
         MARPLACODE;
       </AnimatedText>
-      <AnimatedText showInView timingGap={props.timingGap} fontSize={"8rem"} fontWeight="600" direction="left" easingValues={EASING_VALUES_1}>
+      <AnimatedText showInView timingGap={props.timingGap} fontSize={"8rem"} fontWeight="600" direction="left" easingValues={EASING_VALUES_1} letterSpacing={'-0.8rem'} >
         MARPLACODE;
       </AnimatedText>
 
