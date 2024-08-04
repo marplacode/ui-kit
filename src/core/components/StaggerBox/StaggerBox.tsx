@@ -5,7 +5,7 @@ export const StaggerBox = ({
   children,
   timingGap = 4,
   stackDirection = 'row',
-  letterSpacing,
+  letterSpacing = '0rem',
   ...rest
 }) => {
 

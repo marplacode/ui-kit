@@ -34,14 +34,14 @@ export const HiddenBox: FC<HiddenBoxProps> = ({
         return { x: "-100%" };
       case "right":
         return { x: "100%" };
-      case "top left":
-        return { x: "-100%", y: "-100%" };
-      case "top right":
-        return { x: "100%", y: "-100%" };
-      case "bottom left":
-        return { x: "-100%", y: "100%" };
-      case "bottom right":
-        return { x: "100%", y: "100%" };
+      // case "top left":
+      //   return { x: "-100%", y: "-100%" };
+      // case "top right":
+      //   return { x: "100%", y: "-100%" };
+      // case "bottom left":
+      //   return { x: "-100%", y: "100%" };
+      // case "bottom right":
+      //   return { x: "100%", y: "100%" };
       default:
         return {};
     }

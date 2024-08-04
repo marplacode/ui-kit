@@ -1,31 +1,32 @@
-import { Box, HStack, Text } from "@chakra-ui/react";
+import { Box, HStack } from "@chakra-ui/react";
 import type { Meta, StoryObj } from "@storybook/react";
+import { fn } from "@storybook/test";
+import { Filter } from ".";
 import { UiKitProvider } from "../../context";
 import { Line } from "../Line/Line";
-import { StaggerBox } from "./StaggerBox";
+import { Text } from "../Text";
+
+
 
 const Scene = (props: any) => {
   return (
-    <UiKitProvider>
-      <StaggerBox show={props.show} timingGap={40}>
-        <Text fontSize={"14rem"} fontWeight="600" padding={0} margin={0}>
-          M
+    <HStack>
+      <Filter>
+        <Text fontSize={"8rem"} fontWeight="600" direction="bottom" color="yellow" show={props.show}>
+          A
         </Text>
-        <Text fontSize={"14rem"} fontWeight="600" padding={0} margin={0}>
-          M
-        </Text>
-      </StaggerBox>
-    </UiKitProvider>
+      </Filter>
+    </HStack>
   );
 };
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta: any = {
-  title: "Core/Components/StaggerBox",
+  title: "Core/Components/Filter",
   component: Scene,
   parameters: {
     backgrounds: {
-      default: "dark",
+      default: "light",
     },
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
     layout: "centered",

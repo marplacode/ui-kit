@@ -7,83 +7,79 @@ import { Line } from "../Line/Line";
 
 const Scene = (props: any) => {
   return (
-    <UiKitProvider>
-      <div style={{ height: "100vh" }}>
-        {/* <h1>MARPLACODE;</h1>   */}
-        {/* <div style={{height: '20px', width: '20px', backgroundColor: 'red'}}/> */}
-        <HStack>
-          <HiddenBox
-            show={props.appear}
-            delay={0}
-            // duration={0.3}
+    <HStack>
+      {/* <h1>MARPLACODE;</h1>   */}
+      {/* <div style={{height: '20px', width: '20px', backgroundColor: 'red'}}/> */}
+      <HiddenBox
+        show={props.appear}
+        delay={0}
+        // duration={0.3}
 
-            // height={'300px'}
-            // as="span"
-            {...props}
-          >
-            <Text fontSize={"14rem"}   fontWeight="600" padding={0} margin={0}>
-              M
-            </Text>
-          </HiddenBox>
+        // height={'300px'}
+        // as="span"
+        {...props}
+      >
+        <Text fontSize={"14rem"} fontWeight="600" padding={0} margin={0}>
+          M
+        </Text>
+      </HiddenBox>
 
-          <HiddenBox
-            show={props.appear}
-            delay={0.05}
-            // duration={0.3}
-            {...props}
-          >
-            <Text fontSize={"14rem"} fontWeight="600" padding={0} margin={0}>
-              A
-            </Text>
-          </HiddenBox>
+      <HiddenBox
+        show={props.appear}
+        delay={0.05}
+        // duration={0.3}
+        {...props}
+      >
+        <Text fontSize={"14rem"} fontWeight="600" padding={0} margin={0}>
+          A
+        </Text>
+      </HiddenBox>
 
-          <HiddenBox
-            show={props.appear}
-            delay={0.09}
-            // duration={0.3}
-            {...props}
-          >
-            <Text fontSize={"14rem"} fontWeight="600" padding={0} margin={0}>
-              R
-            </Text>
-          </HiddenBox>
+      <HiddenBox
+        show={props.appear}
+        delay={0.09}
+        // duration={0.3}
+        {...props}
+      >
+        <Text fontSize={"14rem"} fontWeight="600" padding={0} margin={0}>
+          R
+        </Text>
+      </HiddenBox>
 
-          <HiddenBox
-            show={props.appear}
-            delay={0.11}
-            // duration={0.3}
-            {...props}
-          >
-            <Text fontSize={"14rem"} fontWeight="600" padding={0} margin={0}>
-              P
-            </Text>
-          </HiddenBox>
+      <HiddenBox
+        show={props.appear}
+        delay={0.11}
+        // duration={0.3}
+        {...props}
+      >
+        <Text fontSize={"14rem"} fontWeight="600" padding={0} margin={0}>
+          P
+        </Text>
+      </HiddenBox>
 
-          <HiddenBox
-            show={props.appear}
-            delay={0.13}
-            // duration={0.3}
-            {...props}
-          >
-            <Text fontSize={"14rem"} fontWeight="600" padding={0} margin={0}>
-              L
-            </Text>
-          </HiddenBox>
+      <HiddenBox
+        show={props.appear}
+        delay={0.13}
+        // duration={0.3}
+        {...props}
+      >
+        <Text fontSize={"14rem"} fontWeight="600" padding={0} margin={0}>
+          L
+        </Text>
+      </HiddenBox>
 
-          <HiddenBox
-            show={props.appear}
-            delay={0.33}
-            // duration={0.3}
-            {...props}
-            direction="right"
-          >
-            <Text fontSize={"14rem"} fontWeight="600" padding={0} margin={0}>
-              A
-            </Text>
-          </HiddenBox>
-        </HStack>
-      </div>
-    </UiKitProvider>
+      <HiddenBox
+        show={props.appear}
+        delay={0.33}
+        // duration={0.3}
+        {...props}
+        direction="right"
+      >
+        <Text fontSize={"14rem"} fontWeight="600" padding={0} margin={0}>
+          A
+        </Text>
+      </HiddenBox>
+    </HStack>
   );
 };
 

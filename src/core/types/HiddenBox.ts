@@ -8,5 +8,4 @@ export interface HiddenBoxProps extends MarplaCommonComponent, PropsWithChildren
     duration?:number,
     height?: null | number,
     easingValues?: number[],
-    isInViewConfig?: UseInViewOptions
 } 
