@@ -1,9 +1,9 @@
 import { Box, HStack, Text } from "@chakra-ui/react";
+import { Line } from "@components/layout";
 import type { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
 import { HiddenBox } from ".";
-import { UiKitProvider } from "../../context";
-import { Line } from "../Line/Line";
+import { UiKitProvider } from "../../../context";
 
 const Scene = (props: any) => {
   return (
@@ -85,7 +85,7 @@ const Scene = (props: any) => {
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta: any = {
-  title: "Core/Components/HiddenBox",
+  title: "Foundations/HiddenBox (DEPRECATED)",
   component: Scene,
   parameters: {
     backgrounds: {

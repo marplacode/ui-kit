@@ -7,6 +7,14 @@ import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  resolve: {
+    alias: {
+      "@components": path.resolve(__dirname, "/src/core/components"),
+      "@hooks": path.resolve(__dirname, "/src/core/hooks"),
+      "@context": path.resolve(__dirname, "/src/core/context"),
+      "@types": path.resolve(__dirname, "/src/core/types"),
+    },
+  },
   plugins: [
     react(),
     dts({

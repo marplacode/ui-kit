@@ -1,27 +1,24 @@
 import { Box, HStack, Text } from "@chakra-ui/react";
 import type { Meta, StoryObj } from "@storybook/react";
+import { fn } from "@storybook/test";
+import { Video } from "./Video";
 import { UiKitProvider } from "../../context";
 import { Line } from "../Line/Line";
-import { StaggerBox } from "./StaggerBox";
 
 const Scene = (props: any) => {
   return (
-    <UiKitProvider>
-      <StaggerBox show={props.show} timingGap={40}>
-        <Text fontSize={"14rem"} fontWeight="600" padding={0} margin={0}>
-          M
-        </Text>
-        <Text fontSize={"14rem"} fontWeight="600" padding={0} margin={0}>
-          M
-        </Text>
-      </StaggerBox>
-    </UiKitProvider>
+    <HStack>
+      {/* <h1>MARPLACODE;</h1>   */}
+      {/* <div style={{height: '20px', width: '20px', backgroundColor: 'red'}}/> */}
+      <Video />
+
+    </HStack>
   );
 };
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta: any = {
-  title: "Core/Components/StaggerBox",
+  title: "Media/Video",
   component: Scene,
   parameters: {
     backgrounds: {

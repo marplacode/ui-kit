@@ -1,5 +1,5 @@
 import type { StoryObj } from "@storybook/react";
-import { CUBIC_MOTION_FUNCTION_2, CUBIC_MOTION_FUNCTION_3, EASING_VALUES_1 } from "../HiddenBox";
+import { CUBIC_MOTION_FUNCTION_2, CUBIC_MOTION_FUNCTION_3, EASING_VALUES_1 } from "@components/foundations/MotionBox";
 import { Text } from "./Text";
 
 const Scene = (props: any) => {
@@ -38,7 +38,7 @@ const Scene = (props: any) => {
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta: any = {
-  title: "Core/Components/Text",
+  title: "Typography/Text",
   component: Scene,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout

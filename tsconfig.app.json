@@ -40,7 +40,14 @@
     "jsx": "react-jsx",
     "declaration": true,
     "declarationDir": "./dist/types",
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "baseUrl": "./src",
+    "paths": {
+      "@components/*": ["./core/components/*"],
+      "@hooks/*": ["./core/hooks/*"],
+      "@context/*": ["./core/context/*"],
+      "@types/*": ["./core/types/*"]
+    },
   },
   "include": ["src/core"],
   "exclude": ["node_modules"]

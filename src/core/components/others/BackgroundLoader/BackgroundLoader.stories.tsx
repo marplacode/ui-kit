@@ -1,23 +1,21 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
-import { HiddenBox } from '../HiddenBox';
-import { Line } from './Line';
+import { BackgroundLoader } from './BackgroundLoader';
 
 
 
 const Scene = (props:any) => {
 
-  return <div style={{height:'100vh'}}>
+  return <>
     
-  <h1>MARPLACODE;</h1>  
-  <Line {...props}/>
-  
-  </div>
+  <BackgroundLoader {...props}/>
+  <h1>MARPLACODE;</h1>
+  </>
 }
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
-const meta:any = {
-  title: 'Core/Components/Line',
+const meta = {
+  title: 'Others/BackgroundLoader',
   component: Scene,
   parameters: {
     backgrounds: {
@@ -30,34 +28,49 @@ const meta:any = {
   tags: ['autodocs'],
   // More on argTypes: https://storybook.js.org/docs/api/argtypes
   argTypes: {
+    backgroundColor: { control: 'color' },
     variation: { options: ['sliding','colorchange'] },
     direction: { options: ['left','top','intercalated'] },
-    // appear:  true,
   },
   // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args
   args: { onClick: (a:any) => console.log(a) },
-}  satisfies Meta<typeof Line>;
+} satisfies Meta<typeof BackgroundLoader>;
 
 export default meta;
 // type Story = StoryObj<typeof meta>;
 type Story = StoryObj<any>;
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
-export const Normal: any = {
+export const SlidingBlackAndGrey: any = {
   args: {
-    show:true,
-    variation: 'vertical',
-
-    
-    // direction: 'left',
+    show: false,
+    variation: 'sliding',
+    direction: 'left',
   },
 };
 
-export const Appearing: any = {
+export const SlidingColors: Story = {
   args: {
-    show:true,
-    variation: 'vertical',
-
+    show: false,
+    variation: 'sliding',
+    direction: 'left',
+    primaryColor: 'red',
+    secondaryColor: 'brown',
   },
 };
 
+export const Scaling: Story = {
+  args: {
+    show: false,
+    variation: 'scaling',
+  },
+};
+
+export const Fragmented: Story = {
+  args: {
+    show: false,
+    variation: 'fragmented',
+    direction: "vertical",
+    autoChange: true
+  },
+};

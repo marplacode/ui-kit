@@ -1,6 +1,6 @@
 import { Text as CText } from "@chakra-ui/react";
-import { CUBIC_MOTION_FUNCTION_1 } from "../HiddenBox";
-import { StaggerBox } from "../StaggerBox";
+import { CUBIC_MOTION_FUNCTION_1 } from "@components/foundations";
+import { StaggerBox } from "@components/foundations/StaggerBox";
 
 export const Text = ({
   children = "",

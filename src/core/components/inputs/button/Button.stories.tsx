@@ -1,32 +1,23 @@
-import { Box, HStack } from "@chakra-ui/react";
+import { Box, HStack, Text } from "@chakra-ui/react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
-import { Filter } from ".";
-import { UiKitProvider } from "../../context";
-import { Line } from "../Line/Line";
-import { Text } from "../Text";
-
-
 
 const Scene = (props: any) => {
   return (
     <HStack>
-      <Filter>
-        <Text fontSize={"8rem"} fontWeight="600" direction="bottom" color="yellow" show={props.show}>
-          A
-        </Text>
-      </Filter>
+
+
     </HStack>
   );
 };
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta: any = {
-  title: "Core/Components/Filter",
+  title: "Inputs/Button",
   component: Scene,
   parameters: {
     backgrounds: {
-      default: "light",
+      default: "dark",
     },
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
     layout: "centered",
@@ -37,7 +28,7 @@ const meta: any = {
   argTypes: {},
   // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args
   args: { onClick: (a: any) => console.log(a) },
-} satisfies Meta<typeof Line>;
+};
 
 export default meta;
 // type Story = StoryObj<typeof meta>;
