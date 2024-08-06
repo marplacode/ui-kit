@@ -1,7 +1,23 @@
-import { Box } from "@chakra-ui/react";
-import { motion, useInView } from "framer-motion";
-import { FC, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { Box, Image as CImage } from "@chakra-ui/react";
+import { Filter, MotionBox } from "@components/foundations";
+import { MarplaCommonComponent } from "@types/MarplaCommonComponent";
+import { FC } from "react";
 
-export const Image: FC<any> = ({}) => {
-  return <Box></Box>;
+export const Image: FC<MarplaCommonComponent & any> = ({
+  width,
+  height,
+  src,
+  shape,
+  effect,
+  ...rest
+}) => {
+  return (
+    <Filter shape={shape} effect={effect}>
+      <MotionBox width={width - 20} height={height - 20} {...rest}>
+        <Box width={width} height={height}>
+          <CImage src={src} width={width} height={height} />
+        </Box>
+      </MotionBox>
+    </Filter>
+  );
 };

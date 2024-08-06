@@ -80,6 +80,7 @@ const DashedLineCenter = ({ show = true, ...props }) => {
     </Box>
   );
 };
+
 export const Line = ({
   show = true,
   variation = "horizontalLineCenter",

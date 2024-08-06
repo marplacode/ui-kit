@@ -72,7 +72,7 @@ export const Primary: any = {
     // letters: letterAnimations,
     fontSize: "80px",
     show: true,
-    timingGap: 4,
+    timingGap: 20,
     text: "MARPLACODE;"
   },
 };

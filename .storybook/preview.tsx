@@ -14,11 +14,15 @@ const preview: Preview = {
     },
   },
 
-  decorators: [(Story) => (
-    <Box height='100vh'><UiKitProvider>{<Story />}</UiKitProvider> </Box>
-  )],
+  decorators: [
+    (Story) => (
+      <Box height="100vh">
+        <UiKitProvider>{<Story />}</UiKitProvider>{" "}
+      </Box>
+    ),
+  ],
 
-  tags: ["autodocs"]
+  tags: ["autodocs"],
 };
 
 export default preview;

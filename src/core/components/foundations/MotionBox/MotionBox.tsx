@@ -25,6 +25,7 @@ export const MotionBox: FC<HiddenBoxProps> = ({
   easingValues = CUBIC_MOTION_FUNCTION_1,
   isInViewConfig = {}
 }) => {
+
   const initialPosition = useMemo(() => {
     switch (direction) {
       case "top":
@@ -35,14 +36,6 @@ export const MotionBox: FC<HiddenBoxProps> = ({
         return { x: "-100%" };
       case "right":
         return { x: "100%" };
-      // case "top left":
-      //   return { x: "-100%", y: "-100%" };
-      // case "top right":
-      //   return { x: "100%", y: "-100%" };
-      // case "bottom left":
-      //   return { x: "-100%", y: "100%" };
-      // case "bottom right":
-      //   return { x: "100%", y: "100%" };
       default:
         return {};
     }
@@ -64,8 +57,8 @@ export const MotionBox: FC<HiddenBoxProps> = ({
   useLayoutEffect(() => {
     if (childRef.current) {
       setDimensions({
-        width: childRef.current.clientWidth,
-        height: childRef.current.clientHeight,
+        width: `${childRef.current.clientWidth}px`,
+        height: `${childRef.current.clientHeight}px`,
       });
     }
   }, [children]);
