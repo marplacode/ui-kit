@@ -1,13 +1,14 @@
 import { Box, HStack, Text } from "@chakra-ui/react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
-import { WorkCaseTemplate, WorkCaseTemplateDefault } from ".";
+import {  WorkCaseTemplateDefault } from ".";
 
 const Scene = (props: any) => {
   return (
-    props.playground ? 
-<WorkCaseTemplate {...props}/> :
-<WorkCaseTemplateDefault {...props}/>
+    <WorkCaseTemplateDefault {...props}/>
+//     props.playground ? 
+// <WorkCaseTemplate {...props}/> :
+// <WorkCaseTemplateDefault {...props}/>
     
   );
 };

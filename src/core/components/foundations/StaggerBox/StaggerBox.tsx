@@ -15,6 +15,7 @@ export const StaggerBox = ({
   stackDirection = "row",
   letterSpacing = "0rem",
   show: initalShow,
+  textAlign,
   ...props
 }) => {
   const { delay, ...rest } = props
@@ -43,6 +44,7 @@ export const StaggerBox = ({
     <Stack direction={stackDirection as any}
      letterSpacing={letterSpacing} 
      spacing={0}
+    //  justifyItems={textAlign}
     >
       {children.map((child, index) => (
         <MotionBox delay={0.05 + index * (timingGap / 100)} show={show} {...rest}>

@@ -1,7 +1,7 @@
-import { Text as CText } from "@chakra-ui/react";
+import { Text as CText, Box } from "@chakra-ui/react";
 import { CUBIC_MOTION_FUNCTION_1 } from "@components/foundations";
 import { StaggerBox } from "@components/foundations/StaggerBox";
-import { motion } from "framer-motion";
+import {  motion } from "framer-motion";
 import { useCallback } from "react";
 
 
@@ -27,6 +27,7 @@ export const Text = ({
   wordsPerParagraph = undefined,
   color,
   endColor,
+  colorDelay,
   // wordsTimingGap = 0,
   ...props
 }) => {
@@ -52,18 +53,19 @@ export const Text = ({
           easingValues={easingValues}
           letterSpacing={letterSpacing}
           delay={delay}
+          // textAlign={textAlign}
         >
           {onRenderLetter
             ? incomingChildren.map((letter, index) =>
                 onRenderLetter(
-                  <CText padding={0} margin={0} {...props}>
+                  <MotionText padding={0} margin={0} {...props}>
                     {letter}
-                  </CText>,
+                  </MotionText>,
                   { letter, index }
                 )
               )
             : incomingChildren.map((letter) => (
-                <MotionText padding={0} margin={0} initial={{color}} animate={{ color: show ? endColor : color }} transition={{ delay: 0.3, duration: 0.7, ease: CUBIC_MOTION_FUNCTION_1 }} {...props}>
+                <MotionText padding={0} margin={0} initial={{color}} animate={{ color: show ? endColor : color }} transition={{ delay: colorDelay ?? 0.3, duration: 0.7, ease: CUBIC_MOTION_FUNCTION_1 }} {...props}>
                   {letter == " " ? <>&nbsp;</> : letter}
                 </MotionText>
               ))}
@@ -95,7 +97,7 @@ export const Text = ({
       return result;
     };
 
-    return splitText(children, wordsPerParagraph).map( (paragraph, index) => renderText([paragraph.split("")], 0.05 + index * timingGap))
+    return <Box>{splitText(children, wordsPerParagraph).map( (paragraph, index) => renderText([paragraph.split("")], 0.05 + index * timingGap)) }</Box>
   }
 
   return renderText(children.split(""), timingGap);
