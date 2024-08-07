@@ -1,7 +1,8 @@
 import { Box } from "@chakra-ui/react";
+import { useCalculateNodeSize } from "@hooks/useCalculateNodeSize";
 import { HiddenBoxProps } from "@types/HiddenBox";
 import { motion, useInView } from "framer-motion";
-import { FC, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { FC, useMemo } from "react";
 
 
 const MotionBox2 = motion(Box);
@@ -40,9 +41,8 @@ export const MotionBox: FC<HiddenBoxProps> = ({
         return {};
     }
   }, [direction]);
-  const [{ width, height }, setDimensions] = useState({ width: 0, height: 0 });
-  const childRef = useRef(null);
-  const isInView = useInView(childRef, isInViewConfig);
+  const { ref: childrenRef, size: {width, height } } = useCalculateNodeSize({ formatToPixels: true })
+  const isInView = useInView(childrenRef, isInViewConfig);
 
   const calculateAnimation = useMemo(() => {
     if (animationDisabled) {
@@ -54,20 +54,13 @@ export const MotionBox: FC<HiddenBoxProps> = ({
     return show ? showPosition : initialPosition;
   }, [initialPosition, showPosition, isInView, animationDisabled, show]);
 
-  useLayoutEffect(() => {
-    if (childRef.current) {
-      setDimensions({
-        width: `${childRef.current.clientWidth}px`,
-        height: `${childRef.current.clientHeight}px`,
-      });
-    }
-  }, [children]);
-
   return (
     <Box
       overflow={"hidden"}
       display="flex"
+      // width={`${width}px`}
       width={width}
+      // height={height}
       height={initialHeight}
     >
       <MotionBox2
@@ -75,7 +68,7 @@ export const MotionBox: FC<HiddenBoxProps> = ({
         initial={animationDisabled ? { x: 0, y: 0 } : initialPosition}
         animate={calculateAnimation}
         transition={{ delay, duration, ease: easingValues }}
-        ref={childRef}
+        ref={childrenRef}
       >
         {children}
       </MotionBox2>

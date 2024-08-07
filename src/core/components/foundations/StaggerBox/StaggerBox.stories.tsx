@@ -71,6 +71,6 @@ export const Stack: any = {
   args: {
     show: true,
     stackDirection: "stack",
-    timingGap: 0,
+    timingGap: 20,
   },
 };

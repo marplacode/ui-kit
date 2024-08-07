@@ -3,6 +3,7 @@ import { CUBIC_MOTION_FUNCTION_2, CUBIC_MOTION_FUNCTION_3, EASING_VALUES_1 } fro
 import { Text } from "./Text";
 
 const Scene = (props: any) => {
+
   return (
     <>
       <Text {...props} fontSize={"8rem"} fontWeight="600" direction="bottom">
@@ -61,6 +62,25 @@ type Story = StoryObj<typeof meta>;
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary: any = {
   args: {
+    // text:'asdsa',
+    // isLoading: true,
+    // color:'black'
+    fontWeight: "600",
+    // delay:0.1,
+    // duration:0.5,
+    // easing:"easeIn",
+    // color:"teal.500",
+    // letters: letterAnimations,
+    fontSize: "80px",
+    show: true,
+    timingGap: 20,
+    text: "MARPLACODE;"
+  },
+};
+
+export const Paragraph: any = {
+  args: {
+    
     // text:'asdsa',
     // isLoading: true,
     // color:'black'

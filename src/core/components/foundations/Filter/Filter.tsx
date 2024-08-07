@@ -1,8 +1,10 @@
-import { Box, LinkBox, styled } from "@chakra-ui/react";
+import { Box, LinkBox, styled, VStack } from "@chakra-ui/react";
+import { useCalculateNodeSize } from "@hooks/useCalculateNodeSize";
 import { FilterComponentProps } from "@types/FilterComponent";
 import { motion } from "framer-motion";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { CUBIC_MOTION_FUNCTION_1, CUBIC_MOTION_FUNCTION_3 } from "../MotionBox";
+import { BorderMarkFilter } from "./BorderMarkFilter";
 
 const AnimatedBox = motion(Box);
 
@@ -33,31 +35,66 @@ export const Filter: FC<FilterComponentProps> = ({
   shape = "none",
   effect = "none",
   disabled = false,
+  CustomFilter = undefined,
   children,
   ...props
 }) => {
+  const {
+    ref,
+    size: { width, height },
+  } = useCalculateNodeSize({ formatToPixels: true });
+
   if (disabled) {
     return <>{children}</>;
   }
 
+  if (CustomFilter) {
+    return (
+      <VStack ref={ref}>
+        <Box position={"absolute"}>
+          <CustomFilter {...props} {...{ width, height, ref }} />
+        </Box>
+        {children}
+      </VStack>
+    );
+  }
+
   if (effect == "color") {
-    return <ColorTransitionFilter {...props}>{children}</ColorTransitionFilter>;
+    return (
+      <VStack ref={ref}>
+        <ColorTransitionFilter {...props}>{children}</ColorTransitionFilter>
+      </VStack>
+    );
   }
 
   if (effect == "breathing") {
-    return <BreathingEffect {...props}>{children}</BreathingEffect>;
+    return (
+      <VStack ref={ref}>
+        <BreathingEffect {...props}>{children}</BreathingEffect>
+      </VStack>
+    );
+  }
+
+  if (effect == "border") {
+    return (
+        <BorderMarkFilter width={width} height={height} childrenRef={ref}  {...props}>
+          {children}
+        </BorderMarkFilter>
+    );
   }
 
   const finalShape: any = shapes[shape] || "none";
 
+    const [fake,setFake] = useState(false)
+  useEffect(()=> {
+    setFake(fake!)
+  }, [props.show])
+
   return (
-    <Box clipPath={finalShape} transition="ease-in" {...props}>
+    <Box ref={ref} clipPath={finalShape} transition="ease-in" {...props}>
       {children}
     </Box>
   );
-  // <div style={{"filter": "hue-rotate(90deg)"}}>
-  //   {children}
-  // </div>
 };
 
 const BreathingEffect = ({ children, ...props }) => {
@@ -79,8 +116,6 @@ const BreathingEffect = ({ children, ...props }) => {
     </motion.div>
   );
 };
-
-
 
 // const FilterWrapper = styled(motion.div)`
 //   display: inline-block;
@@ -105,8 +140,14 @@ const BreathingEffect = ({ children, ...props }) => {
 //   );
 // };
 
-
-const ColorTransitionFilter = ({ blur, startColor, endColor, show, children, ...props }) => {
+const ColorTransitionFilter = ({
+  blur,
+  startColor,
+  endColor,
+  show,
+  children,
+  ...props
+}) => {
   return (
     <AnimatedBox
       initial={{ filter: `blur(${blur}px)`, backgroundColor: startColor }}

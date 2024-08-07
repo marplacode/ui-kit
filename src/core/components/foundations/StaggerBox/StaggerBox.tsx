@@ -1,4 +1,4 @@
-import { Box, Stack } from "@chakra-ui/react";
+import { Box, Stack, VStack } from "@chakra-ui/react";
 import { MotionBox } from "../MotionBox";
 
 /**
@@ -8,17 +8,17 @@ import { MotionBox } from "../MotionBox";
  * @returns 
  */
 export const StaggerBox = ({
-  children,
+  children: initialChildren,
   timingGap = 4,
   stackDirection = "row",
   letterSpacing = "0rem",
   ...props
 }) => {
   const { delay, ...rest } = props
-
+  const children = Array.isArray(initialChildren) ? initialChildren : [initialChildren]
   if (stackDirection == "stack") {
     return (
-      <>
+      <VStack position='relative'>
         {children.map((child, index) => (
           <Box position={"absolute"}>
             <MotionBox delay={0.05 + index * (timingGap / 100)} {...rest}>
@@ -26,7 +26,7 @@ export const StaggerBox = ({
             </MotionBox>
           </Box>
         ))}
-      </>
+      </VStack>
     );
   }
 

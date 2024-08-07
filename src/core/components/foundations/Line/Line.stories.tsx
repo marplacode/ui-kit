@@ -17,7 +17,7 @@ const Scene = (props:any) => {
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta:any = {
-  title: 'Layout/Line',
+  title: 'Foundations/Line',
   component: Scene,
   parameters: {
     backgrounds: {

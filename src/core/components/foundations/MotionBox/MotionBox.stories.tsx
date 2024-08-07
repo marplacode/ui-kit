@@ -2,7 +2,7 @@ import { Box, HStack } from "@chakra-ui/react";
 import { Text } from "@components/typography";
 import type { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
-import { MotionBox } from ".";
+import { MotionBox } from "./MotionBox";
 
 
 const Scene = (props: any) => {
