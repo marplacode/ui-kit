@@ -46,6 +46,7 @@
       "@components/*": ["./core/components/*"],
       "@hooks/*": ["./core/hooks/*"],
       "@context/*": ["./core/context/*"],
+      "@utils/*": ["./core/utils/*"],
       "@types/*": ["./core/types/*"]
     },
   },

@@ -42,7 +42,7 @@ export const Filter: FC<FilterComponentProps> = ({
   const {
     ref,
     size: { width, height },
-  } = useCalculateNodeSize({ formatToPixels: true });
+  } = useCalculateNodeSize();
 
   if (disabled) {
     return <>{children}</>;

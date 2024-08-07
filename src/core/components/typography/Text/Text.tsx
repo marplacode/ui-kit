@@ -19,6 +19,7 @@ export const Text = ({
   show = true,
   showInView = false,
   timingGap = 0,
+  delay = 0,
   animationDisabled = false,
   easingValues = CUBIC_MOTION_FUNCTION_1,
   letterSpacing = "0rem",
@@ -50,6 +51,7 @@ export const Text = ({
           animationDisabled={animationDisabled}
           easingValues={easingValues}
           letterSpacing={letterSpacing}
+          delay={delay}
         >
           {onRenderLetter
             ? incomingChildren.map((letter, index) =>

@@ -1,20 +1,27 @@
-import { Box, HStack, Text } from "@chakra-ui/react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { fn } from "@storybook/test";
-import { WorkCaseTemplate, WorkCaseTemplateDefault } from ".";
+import { LoaderBox } from "./LoaderBox";
+import { Image } from "@components/media";
+import ExampleImage from "../../../../stories/assets/example.png";
 
-const Scene = (props: any) => {
+const Scene = ({ show }: any) => {
   return (
-    props.playground ? 
-<WorkCaseTemplate {...props}/> :
-<WorkCaseTemplateDefault {...props}/>
-    
+    <LoaderBox show={show}>
+      <Image
+        src={ExampleImage}
+        direction="right"
+        width={"300px"}
+        height={"300px"}
+        // effect="breathing"
+        show={show}
+        delay={0.5}
+      />
+    </LoaderBox>
   );
 };
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta: any = {
-  title: "Templates/WorkCaseTemplate",
+  title: "Foundations/LoaderBox",
   component: Scene,
   parameters: {
     backgrounds: {
@@ -26,26 +33,22 @@ const meta: any = {
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ["autodocs"],
   // More on argTypes: https://storybook.js.org/docs/api/argtypes
-  argTypes: {},
+  argTypes: {
+    variation: { options: ["sliding", "colorchange"] },
+    direction: { options: ["left", "top", "intercalated"] },
+    // appear:  true,
+  },
   // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args
   args: { onClick: (a: any) => console.log(a) },
-}
+} satisfies Meta<typeof Line>;
 
 export default meta;
 // type Story = StoryObj<typeof meta>;
 type Story = StoryObj<any>;
 
-export const Default: any = {
+// More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
+export const Imasge: any = {
   args: {
     show: true,
-    text: "MARPLACODE;"
-  },
-};
-
-export const Playground: any = {
-  args: {
-    playground:true,
-    show: true,
-    text: "MARPLACODE;"
   },
 };

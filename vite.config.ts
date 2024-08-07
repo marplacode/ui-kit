@@ -13,6 +13,7 @@ export default defineConfig({
       "@hooks": path.resolve(__dirname, "/src/core/hooks"),
       "@context": path.resolve(__dirname, "/src/core/context"),
       "@types": path.resolve(__dirname, "/src/core/types"),
+      "@utils": path.resolve(__dirname, "/src/core/utils"),
     },
   },
   plugins: [

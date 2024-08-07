@@ -4,7 +4,6 @@ import { HiddenBoxProps } from "@types/HiddenBox";
 import { motion, useInView } from "framer-motion";
 import { FC, useMemo } from "react";
 
-
 const MotionBox2 = motion(Box);
 
 export const CUBIC_MOTION_FUNCTION_1 = [0.37, 0.23, 0, 1.01];
@@ -24,10 +23,13 @@ export const MotionBox: FC<HiddenBoxProps> = ({
   duration = 0.8,
   height: initialHeight = null,
   easingValues = CUBIC_MOTION_FUNCTION_1,
-  isInViewConfig = {}
+  isInViewConfig = {},
+  initialValues = undefined,
 }) => {
-
   const initialPosition = useMemo(() => {
+    if (initialValues) {
+      return initialValues;
+    }
     switch (direction) {
       case "top":
         return { y: "-100%" };
@@ -41,7 +43,10 @@ export const MotionBox: FC<HiddenBoxProps> = ({
         return {};
     }
   }, [direction]);
-  const { ref: childrenRef, size: {width, height } } = useCalculateNodeSize({ formatToPixels: true })
+  const {
+    ref: childrenRef,
+    size: { width, height },
+  } = useCalculateNodeSize({ formatToPixels: true });
   const isInView = useInView(childrenRef, isInViewConfig);
 
   const calculateAnimation = useMemo(() => {
@@ -58,9 +63,7 @@ export const MotionBox: FC<HiddenBoxProps> = ({
     <Box
       overflow={"hidden"}
       display="flex"
-      // width={`${width}px`}
       width={width}
-      // height={height}
       height={initialHeight}
     >
       <MotionBox2

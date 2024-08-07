@@ -17,7 +17,7 @@ const preview: Preview = {
   decorators: [
     (Story) => (
       <Box height="100vh">
-        <UiKitProvider>{<Story />}</UiKitProvider>{" "}
+        <UiKitProvider>{<Story />}</UiKitProvider>
       </Box>
     ),
   ],
