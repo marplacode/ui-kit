@@ -8,14 +8,14 @@ import { useState } from "react";
 
 export const LoaderBox = ({
   children,
-  width,
-  height,
+  width = '300px',
+  height = '300px',
   delay,
   show: initalShow,
   ...props
 }) => {
   const [show, setShow] = useState(initalShow);
-  
+
   useDebounce(
     () => {
       setShow(initalShow);
@@ -28,26 +28,21 @@ export const LoaderBox = ({
     <Box width={width} height={height} {...props}>
       <StaggerBox stackDirection="stack">
         <MotionBox show={show} direction="right" delay={0.39}>
-          <Box
-            bg="#FFF"
-            width={"300px"}
-            height={"300px"}
-            blendMode="difference"
-          />
+          <Box bg="#FFF" width={width} height={height} blendMode="difference" />
         </MotionBox>
         <MotionBox show={show} direction="right" delay={0.6}>
           <Box
             bg="#c2c2c2"
-            width={"300px"}
-            height={"300px"}
+            width={width}
+            height={height}
             blendMode="difference"
           />
         </MotionBox>
         <MotionBox show={show} direction="right" delay={0.9}>
           <Box
             bg="#6e6e6e"
-            width={"300px"}
-            height={"300px"}
+            width={width}
+            height={height}
             blendMode="difference"
           />
         </MotionBox>

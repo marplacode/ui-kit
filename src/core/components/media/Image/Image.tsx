@@ -13,7 +13,8 @@ export const Image: FC<MarplaCommonComponent & any> = ({
 }) => {
   return (
     <Filter shape={shape} effect={effect}>
-      <MotionBox width={width - 20} height={height - 20} {...rest}>
+      <MotionBox width={width} height={height} {...rest}>
+      {/* <MotionBox width={width - 20} height={height - 20} {...rest}> */}
         <Box width={width} height={height}>
           <CImage src={src} width={width} height={height} />
         </Box>
