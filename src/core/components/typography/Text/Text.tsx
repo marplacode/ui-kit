@@ -1,6 +1,6 @@
 import { Text as CText, Box } from "@chakra-ui/react";
-import { CUBIC_MOTION_FUNCTION_1 } from "@components/foundations";
 import { StaggerBox } from "@components/foundations/StaggerBox";
+import { CUBIC_MOTION_FUNCTION_1 } from "@config/definitions";
 import {  motion } from "framer-motion";
 import { useCallback } from "react";
 
@@ -30,7 +30,7 @@ export const Text = ({
   colorDelay,
   // wordsTimingGap = 0,
   ...props
-}) => {
+}:any) => {
   // const newChildren = children;
   // typeof children == "string"
   //   ? children.split("")
@@ -79,6 +79,7 @@ export const Text = ({
       animationDisabled,
       easingValues,
       letterSpacing,
+      delay,
       props
     ]
   );

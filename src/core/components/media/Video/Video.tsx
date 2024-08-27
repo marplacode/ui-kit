@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import { Filter, MotionBox } from "@components/foundations";
-import { MarplaCommonComponent } from "@types/MarplaCommonComponent";
+import { MarplaCommonComponent } from "@commonTypes/MarplaCommonComponent";
 import { FC } from "react";
 
 export const Video: FC<MarplaCommonComponent & any> = ({

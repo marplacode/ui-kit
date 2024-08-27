@@ -1,10 +1,10 @@
 import { Box, LinkBox, styled, VStack } from "@chakra-ui/react";
 import { useCalculateNodeSize } from "@hooks/useCalculateNodeSize";
-import { FilterComponentProps } from "@types/FilterComponent";
+import { FilterComponentProps } from "@commonTypes/FilterComponent";
 import { motion } from "framer-motion";
 import { FC, useEffect, useState } from "react";
-import { CUBIC_MOTION_FUNCTION_1, CUBIC_MOTION_FUNCTION_3 } from "../MotionBox";
 import { BorderMarkFilter } from "./BorderMarkFilter";
+import { CUBIC_MOTION_FUNCTION_1, CUBIC_MOTION_FUNCTION_3 } from "@config/definitions";
 
 const AnimatedBox = motion(Box);
 
@@ -31,7 +31,7 @@ const effects = {
  * @param param0
  * @returns
  */
-export const Filter: FC<FilterComponentProps> = ({
+export const Filter: FC<FilterComponentProps & any> = ({
   shape = "none",
   effect = "none",
   disabled = false,

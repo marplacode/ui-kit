@@ -1,9 +1,7 @@
-import { MotionBoxProps } from "@types/HiddenBox";
+import { MotionBoxProps } from "@commonTypes/HiddenBox";
 import { FC, useCallback } from "react";
 import { VLine, HLine, HStack, Box } from "@components";
-import { useCalculateNodeSize } from "@hooks/useCalculateNodeSize";
 import { VStack } from "@chakra-ui/react";
-import { formatUnit } from "@utils";
 
 export const BorderMarkFilter: FC<MotionBoxProps> = ({
   show,
@@ -16,7 +14,7 @@ export const BorderMarkFilter: FC<MotionBoxProps> = ({
   thickness = 2,
   sides = { top: null, bottom: null, left: null, right: null },
   ...props
-}) => {
+}:any) => {
   const thicknessOffset = `10${thickness}%`;
 console.log('WW',width)
   const renderLines = useCallback(
@@ -75,7 +73,7 @@ console.log('WW',width)
         </VStack>
       </VStack>
     ),
-    [width, height, show]
+    [width, height, show, delay]
   );
 
   console.log("chil", childrenRef);

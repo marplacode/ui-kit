@@ -1,7 +1,5 @@
-import { Box, HStack, Icon, Text } from "@chakra-ui/react";
-import { Line } from "@components/layout";
-import { UiKitProvider } from "@context/Provider";
-import type { Meta, StoryObj } from "@storybook/react";
+import { Text } from "@chakra-ui/react";
+import type {  StoryObj } from "@storybook/react";
 import { StaggerBox } from "./StaggerBox";
 
 function getRandomColor() {
@@ -54,7 +52,7 @@ const meta: any = {
   argTypes: {},
   // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args
   args: { onClick: (a: any) => console.log(a) },
-} satisfies Meta<typeof Line>;
+};
 
 export default meta;
 // type Story = StoryObj<typeof meta>;

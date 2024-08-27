@@ -1,12 +1,11 @@
-import { MotionBox, Box } from "@components";
+import { MotionBox } from "@components/foundations";
 import { FC, useState } from "react";
-import { MotionBoxProps } from "@types/HiddenBox";
-import { useDebounce } from "@hooks/useDebounce";
-import { useToggle } from "@hooks/useToggle";
+import { MotionBoxProps } from "@commonTypes/HiddenBox";
 import { formatUnit } from "@utils/formatUnit";
 import { useCalculateNodeSize } from "@hooks/useCalculateNodeSize";
+import { Box } from "@chakra-ui/react";
 
-export const Line: FC<MotionBoxProps> = ({
+export const Line: FC<MotionBoxProps & any> = ({
   show,
   direction = "left",
   delay,

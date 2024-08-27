@@ -1,3 +1,4 @@
+var window: any = window
 export const isMobile = () => {
     let check = false
     ;(function (a) {

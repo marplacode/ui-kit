@@ -2,7 +2,8 @@ import { Box, HStack, Text } from "@chakra-ui/react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
 import { Image } from ".";
-import ExampleImage from '../../../../stories/assets/example.png'
+// @ts-ignore
+import ExampleImage from '@stories/assets/example.png'
 
 const Scene = (props: any) => {
   return (
@@ -29,7 +30,7 @@ const meta: any = {
   argTypes: {},
   // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args
   args: { onClick: (a: any) => console.log(a) },
-} satisfies Meta<typeof Line>;
+} ;
 
 export default meta;
 // type Story = StoryObj<typeof meta>;

@@ -1,19 +1,16 @@
 import { Box } from "@chakra-ui/react";
 import { useCalculateNodeSize } from "@hooks/useCalculateNodeSize";
-import { HiddenBoxProps } from "@types/HiddenBox";
+import { MotionBoxProps } from "@commonTypes/HiddenBox";
 import { motion, useInView } from "framer-motion";
 import { FC, useMemo } from "react";
+import { useGlobalConfig } from "@context/Provider";
+import { CUBIC_MOTION_FUNCTION_1 } from "@config";
 
 const MotionBox2 = motion(Box);
 
-export const CUBIC_MOTION_FUNCTION_1 = [0.37, 0.23, 0, 1.01];
-export const CUBIC_MOTION_FUNCTION_2 = [0.72, 0.08, 0, 1.05];
-export const CUBIC_MOTION_FUNCTION_3 = [0.61, -0.01, 0, 0.99];
-export const EASING_VALUES_1 = [0.38, -0.01, 0.58, 1];
-
 const showPosition = { x: 0, y: 0 };
 
-export const MotionBox: FC<HiddenBoxProps> = ({
+export const MotionBox: FC<MotionBoxProps> = ({
   children,
   animationDisabled = false,
   show = true,
@@ -26,6 +23,8 @@ export const MotionBox: FC<HiddenBoxProps> = ({
   isInViewConfig = {},
   initialValues = undefined,
 }) => {
+  // globalMotionConfig = useContext UiKitProvider
+  const globalMotionConfig = {};
   const initialPosition = useMemo(() => {
     if (initialValues) {
       return initialValues;
@@ -48,6 +47,7 @@ export const MotionBox: FC<HiddenBoxProps> = ({
     size: { width, height },
   } = useCalculateNodeSize({ formatToPixels: true });
   const isInView = useInView(childrenRef, isInViewConfig);
+  const { transition: globalTransitionConfig } = useGlobalConfig();
 
   const calculateAnimation = useMemo(() => {
     if (animationDisabled) {
@@ -68,9 +68,14 @@ export const MotionBox: FC<HiddenBoxProps> = ({
     >
       <MotionBox2
         display="flex"
-        initial={animationDisabled ? { x: 0, y: 0 } : initialPosition}
+        initial={animationDisabled ? showPosition : initialPosition}
         animate={calculateAnimation}
-        transition={{ delay, duration, ease: easingValues }}
+        // transition={{ delay, duration, ease: easingValues }}
+        transition={{
+          delay: delay + globalTransitionConfig.delay,
+          duration: duration + globalTransitionConfig.duration,
+          ease: easingValues,
+        }}
         ref={childrenRef}
       >
         {children}

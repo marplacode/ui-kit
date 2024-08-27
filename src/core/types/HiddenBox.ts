@@ -19,4 +19,5 @@ export interface MotionBoxProps extends MarplaCommonComponent, PropsWithChildren
     duration?:number,
     height?: null | number,
     easingValues?: number[],
+    initialValues?: {}
 } 

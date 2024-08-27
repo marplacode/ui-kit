@@ -17,7 +17,7 @@
     // "moduleDetection": "force",
     // "noEmit": true,
     // "jsx": "react-jsx",
-    
+
     // /* Linting */
     // "strict": false,
     "noUnusedLocals": false,
@@ -43,13 +43,17 @@
     "outDir": "./dist",
     "baseUrl": "./src",
     "paths": {
+      "@components": ["./core/components/index.ts"],
       "@components/*": ["./core/components/*"],
       "@hooks/*": ["./core/hooks/*"],
       "@context/*": ["./core/context/*"],
       "@utils/*": ["./core/utils/*"],
-      "@types/*": ["./core/types/*"]
-    },
+      "@commonTypes/*": ["./core/types/*"],
+      "@config/*": ["./core/config/*"],
+      "@config": ["./core/config/index.ts"],
+      "@stories/*": ["./stories/*"],
+    }
   },
   "include": ["src/core"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "./src/**/*.stories.ts", "./src/**/*.stories.tsx"]
 }

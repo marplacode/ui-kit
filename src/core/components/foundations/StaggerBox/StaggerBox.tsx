@@ -14,12 +14,12 @@ export const StaggerBox = ({
   timingGap = 4,
   stackDirection = "row",
   letterSpacing = "0rem",
-  show: initalShow,
+  show: initialShow,
   textAlign,
   ...props
-}) => {
+}:any) => {
   const { delay, ...rest } = props
-  const [show, setShow] = useState(initalShow)
+  const [show, setShow] = useState(!initialShow)
   const children = Array.isArray(initialChildren) ? initialChildren : [initialChildren]
   
   if (stackDirection == "stack") {
@@ -37,9 +37,11 @@ export const StaggerBox = ({
   }
 
   useDebounce(() => {
-    setShow(initalShow);
-  }, delay * 1000, [initalShow]);
-
+    // console.log('debounce ',initalShow)
+    setShow(initialShow);
+  }, delay * 1000, [initialShow]);
+  // console.log('initial showww',initalShow)
+  // console.log('showww',show)
   return (
     <Stack direction={stackDirection as any}
      letterSpacing={letterSpacing} 

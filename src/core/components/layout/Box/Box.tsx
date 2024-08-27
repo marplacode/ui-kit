@@ -1,6 +1,6 @@
 import { Box as CBox } from "@chakra-ui/react";
 import { Filter } from "@components/foundations";
-import { MarplaCommonComponent } from "@types/MarplaCommonComponent";
+import { MarplaCommonComponent } from "@commonTypes/MarplaCommonComponent";
 import { FC } from "react";
 
 

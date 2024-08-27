@@ -12,9 +12,10 @@ export const LoaderBox = ({
   height = '300px',
   delay,
   show: initalShow,
+  showInView,
   ...props
 }) => {
-  const [show, setShow] = useState(initalShow);
+  const [show, setShow] = useState(!initalShow);
 
   useDebounce(
     () => {
@@ -27,7 +28,7 @@ export const LoaderBox = ({
   return (
     <Box width={width} height={height} {...props}>
       <StaggerBox stackDirection="stack">
-        <MotionBox show={show} direction="right" delay={0.39}>
+        <MotionBox show={show} direction="right" delay={0.39} showInView={showInView}>
           <Box bg="#FFF" width={width} height={height} blendMode="difference" />
         </MotionBox>
         <MotionBox show={show} direction="right" delay={0.6}>
@@ -38,7 +39,7 @@ export const LoaderBox = ({
             blendMode="difference"
           />
         </MotionBox>
-        <MotionBox show={show} direction="right" delay={0.9}>
+      <MotionBox show={show} direction="right" delay={0.9} showInView={showInView}>
           <Box
             bg="#6e6e6e"
             width={width}
@@ -47,7 +48,7 @@ export const LoaderBox = ({
           />
         </MotionBox>
 
-        <Filter effect={"border"} show={show}>
+        <Filter effect={"border"} show={show} showInView={showInView}>
           {children}
         </Filter>
       </StaggerBox>

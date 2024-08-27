@@ -1,5 +1,6 @@
 import type { StoryObj } from "@storybook/react";
-import { CUBIC_MOTION_FUNCTION_2, CUBIC_MOTION_FUNCTION_3, EASING_VALUES_1 } from "@components/foundations/MotionBox";
+import React from "react";
+import { CUBIC_MOTION_FUNCTION_2, CUBIC_MOTION_FUNCTION_3, EASING_VALUES_1 } from "@config/definitions";
 import { Text } from "./Text";
 
 const Scene = (props: any) => {

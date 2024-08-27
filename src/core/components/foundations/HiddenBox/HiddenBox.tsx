@@ -1,8 +1,9 @@
 import { Box } from "@chakra-ui/react";
+import { CUBIC_MOTION_FUNCTION_1 } from "@config/definitions";
 import { motion, useInView } from "framer-motion";
 import { FC, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { HiddenBoxProps } from "../../../types/HiddenBox";
-import { CUBIC_MOTION_FUNCTION_1 } from "../MotionBox";
+
 
 const MotionBox = motion(Box);
 
