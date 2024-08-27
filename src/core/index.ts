@@ -1,3 +1,5 @@
 export * from './hooks'
+export * from './templates'
 export * from './components'
 export * from './context'
+export * from './config'

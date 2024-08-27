@@ -4,8 +4,8 @@ import '@fontsource/poppins';
 
 export const theme = extendTheme({
   fonts: {
-    heading: `'Poppins', sans-serif`,
-    body: `'Poppins', sans-serif`//`'Raleway', sans-serif`,
+    // heading: `'Poppins', sans-serif`,
+    // body: `'Poppins', sans-serif`//`'Raleway', sans-serif`,
   },
 })
 

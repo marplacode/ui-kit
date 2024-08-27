@@ -4,9 +4,26 @@ import { resolve } from "path";
 import dts from "vite-plugin-dts";
 import pkg from "./package.json";
 import path from 'path'
+// import { glob } from 'glob';
+
+// const entries = glob.sync(resolve(__dirname, './src/core/**/*.ts')).filter(
+//   (file) => !file.includes('.stories.')
+// );
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  assetsInclude: ['**/*.mp4','**/*.png'],
+  resolve: {
+    alias: {
+      "@components": path.resolve(__dirname, "/src/core/components"),
+      "@hooks": path.resolve(__dirname, "/src/core/hooks"),
+      "@context": path.resolve(__dirname, "/src/core/context"),
+      "@commonTypes": path.resolve(__dirname, "/src/core/types"),
+      "@utils": path.resolve(__dirname, "/src/core/utils"),
+      "@config": path.resolve(__dirname, "/src/core/config"),
+      "@stories": path.resolve(__dirname, "/src/stories"),
+    },
+  },
   plugins: [
     react(),
     dts({
