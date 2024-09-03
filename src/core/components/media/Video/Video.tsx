@@ -1,7 +1,9 @@
 import { Box } from "@chakra-ui/react";
 import { Filter, MotionBox } from "@components/foundations";
 import { MarplaCommonComponent } from "@commonTypes/MarplaCommonComponent";
-import { FC } from "react";
+import { FC, useEffect, useRef } from "react";
+import { useInView } from "@react-spring/web";
+import { getMotionProps } from "@utils/getMotionProps";
 
 export const Video: FC<MarplaCommonComponent & any> = ({
   width,
@@ -9,15 +11,52 @@ export const Video: FC<MarplaCommonComponent & any> = ({
   src,
   shape,
   effect,
-  ...rest
+  startTime,
+  endTime,
+  ...props
 }) => {
+  const { motionProps, rest } = getMotionProps(props);
+  const ref: any = useRef(null);
+  const isInView = useInView(ref);
+
+  useEffect(() => {
+    if (!startTime || !endTime) return () => {};
+
+    const videoElement = ref.current;
+
+    const handleTimeUpdate = () => {
+      if (endTime && videoElement.currentTime >= endTime) {
+        videoElement.pause();
+      }
+    };
+
+    videoElement.currentTime = startTime;
+    videoElement.addEventListener("timeupdate", handleTimeUpdate);
+    videoElement.play();
+
+    return () => {
+      videoElement.removeEventListener("timeupdate", handleTimeUpdate);
+    };
+  }, [startTime, endTime]);
+
   return (
-    <Filter shape={shape} effect={effect}>
-      <MotionBox width={width} height={height} {...rest}>
-        <Box width={width} height={height}>
-          <video autoPlay={true} muted loop src={src} width={width} height={height}  />
-        </Box>
-      </MotionBox>
-    </Filter>
+    // <Filter shape={shape} effect={effect}>
+    //   <MotionBox width={width} height={height} {...motionProps}>
+    //     <Box width={width} height={height}>
+    <video
+      loop
+      autoPlay
+      muted
+      preload="auto"
+      playsInline
+      ref={ref}
+      src={src}
+      width={width}
+      height={height}
+      {...rest}
+    />
+    //     </Box>
+    //   </MotionBox>
+    // </Filter>
   );
 };

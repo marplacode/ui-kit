@@ -1,30 +1,17 @@
-import { useState, useRef, useLayoutEffect, useEffect } from "react";
+import { useState, useRef, useLayoutEffect, useEffect, useMemo } from "react";
 
-// export const useCalculateNodeSize = ({ formatToPixels = false } = {}) => {
-//   const ref = useRef(null);
-//   const [size, setDimensions] = useState({ width: 0, height: 0 });
 
-//   useLayoutEffect(() => {
-//     if (ref.current) {
-//       setDimensions({
-//         width: formatToPixels ? `${ref.current.clientWidth}px` : ref.current.clientWidth,
-//         height: formatToPixels ? `${ref.current.clientHeight}px` : ref.current.clientHeight,
-//       });
-//     }
-//   }, [ref, formatToPixels]);
-
-//   return { ref, size };
-// };
-
-export const useCalculateNodeSize = ({ formatToPixels = false } = {}) => {
-  const ref = useRef(null);
+export const useCalculateNodeSize = ({ initialRef = null, formatToPixels = false } = {}) => {
+  const internalRef = useRef(null);
+  const ref = initialRef || internalRef
   const [size, setDimensions] = useState({ width: 0, height: 0 });
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const node = ref.current;
 
     if (node) {
       const updateSize = (entries) => {
+        console.log('update',entries)
         if (!entries || entries.length === 0) return;
         const { width, height } = entries[0].contentRect;
         setDimensions({
@@ -40,7 +27,7 @@ export const useCalculateNodeSize = ({ formatToPixels = false } = {}) => {
         resizeObserver.unobserve(node);
       };
     }
-  }, [formatToPixels]);
+  }, [formatToPixels, ref.current]);
 
-  return { ref, size };
+  return { ref, size }
 };

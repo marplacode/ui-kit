@@ -22,6 +22,7 @@ export const MotionBox: FC<MotionBoxProps> = ({
   easingValues = CUBIC_MOTION_FUNCTION_1,
   isInViewConfig = {},
   initialValues = undefined,
+  // config = { inView: {}, animation: {}, etc configs...  }
 }) => {
   // globalMotionConfig = useContext UiKitProvider
   const globalMotionConfig = {};
