@@ -4,9 +4,27 @@ import { FilterComponentProps } from "@commonTypes/FilterComponent";
 import { motion } from "framer-motion";
 import { FC, useEffect, useState } from "react";
 import { BorderMarkFilter } from "./BorderMarkFilter";
-import { CUBIC_MOTION_FUNCTION_1, CUBIC_MOTION_FUNCTION_3 } from "@config/definitions";
+import {
+  CUBIC_MOTION_FUNCTION_1,
+  CUBIC_MOTION_FUNCTION_3,
+} from "@config/definitions";
 
 const AnimatedBox = motion(Box);
+
+const DEFAULT_GRADIENT_CONFIG = {
+  type: "linear",
+  direction: "to bottom",
+  color1: "rgba(1,1,1, 0)",
+  color2: "rgba(0,0,0, 0.9)",
+};
+
+const getGradientType = (type, config = DEFAULT_GRADIENT_CONFIG) => {
+  const gradients = {
+    linear: `linear-gradient(${config.direction}, ${config.color1}, ${config.color2})`,
+    radial: `radial-gradient(${config.color1}, ${config.color2})`,
+  };
+  return gradients[type ?? "radial"];
+};
 
 const shapes = {
   circle: "circle(50% at 50% 50%)",
@@ -37,6 +55,7 @@ export const Filter: FC<FilterComponentProps & any> = ({
   disabled = false,
   CustomFilter = undefined,
   children,
+  config = { gradient: DEFAULT_GRADIENT_CONFIG },
   ...props
 }) => {
   const {
@@ -77,18 +96,49 @@ export const Filter: FC<FilterComponentProps & any> = ({
 
   if (effect == "border") {
     return (
-        <BorderMarkFilter width={width} height={height} childrenRef={ref}  {...props}>
-          {children}
-        </BorderMarkFilter>
+      <BorderMarkFilter
+        width={width}
+        height={height}
+        childrenRef={ref}
+        {...props}
+      >
+        {children}
+      </BorderMarkFilter>
+    );
+  }
+
+  if (effect == "linear-gradient") {
+    return (
+      <Box position="relative" height="100%" width="100%">
+        <Box
+          position="absolute"
+          w="100%"
+          h="100%"
+          bg={getGradientType(config.gradient.type, config.gradient ?? DEFAULT_GRADIENT_CONFIG)}
+        />
+        {children}
+      </Box>
+    );
+  }
+  if (effect == "radial-gradient") {
+    return (
+      <BorderMarkFilter
+        width={width}
+        height={height}
+        childrenRef={ref}
+        {...props}
+      >
+        {children}
+      </BorderMarkFilter>
     );
   }
 
   const finalShape: any = shapes[shape] || "none";
 
-    const [fake,setFake] = useState(false)
-  useEffect(()=> {
-    setFake(fake!)
-  }, [props.show])
+  const [fake, setFake] = useState(false);
+  useEffect(() => {
+    setFake(fake!);
+  }, [props.show]);
 
   return (
     <Box ref={ref} clipPath={finalShape} transition="ease-in" {...props}>
@@ -116,29 +166,6 @@ const BreathingEffect = ({ children, ...props }) => {
     </motion.div>
   );
 };
-
-// const FilterWrapper = styled(motion.div)`
-//   display: inline-block;
-//   filter: ;
-//   transition: filter 0.5s ease-in-out;
-// `;
-
-// const ColorEffect = ({ blur, color, children, show,...props }) => {
-//   return (
-//     <AnimatedBox
-//       display="inline-block"
-//       // filter={`blur(${blur}px) ${color}`}
-//       blur={blur}
-//       bgColor={color}
-//       initial={{ filter: `blur(0px) hue-rotate(0deg)` }}
-//       animate={{ filter: show?  `blur(${blur}px) hue-rotate(${blur}deg)` : `blur(0px) hue-rotate(0deg)` }}
-//       transition={{ duration: 1, ease: CUBIC_MOTION_FUNCTION_1 }}
-//       {...props}
-//     >
-//       {children}
-//     </AnimatedBox>
-//   );
-// };
 
 const ColorTransitionFilter = ({
   blur,

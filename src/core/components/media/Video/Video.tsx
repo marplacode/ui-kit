@@ -40,9 +40,9 @@ export const Video: FC<MarplaCommonComponent & any> = ({
   }, [startTime, endTime]);
 
   return (
-    // <Filter shape={shape} effect={effect}>
-    //   <MotionBox width={width} height={height} {...motionProps}>
-    //     <Box width={width} height={height}>
+    <Filter effect={'linear-gradient'}>
+    {/* //   <MotionBox width={width} height={height} {...motionProps}>
+    //     <Box width={width} height={height}> */}
     <video
       loop
       autoPlay
@@ -55,8 +55,8 @@ export const Video: FC<MarplaCommonComponent & any> = ({
       height={height}
       {...rest}
     />
-    //     </Box>
-    //   </MotionBox>
-    // </Filter>
+    {/* //     </Box>
+    //   </MotionBox> */}
+    </Filter>
   );
 };
