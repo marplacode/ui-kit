@@ -18,7 +18,7 @@ export const StaggerBox = ({
   textAlign,
   ...props
 }:any) => {
-  const { delay, ...rest } = props
+  const { delay,...rest } = props
   const [show, setShow] = useState(!initialShow)
   const children = Array.isArray(initialChildren) ? initialChildren : [initialChildren]
   

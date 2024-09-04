@@ -1,4 +1,4 @@
-export const ALLOWED_MOTION_PROPS = ['direction', 'delay', 'show', 'showInView', 'width', 'height', 'isInViewConfig']
+export const ALLOWED_MOTION_PROPS = ['direction', 'delay', 'show', 'showInView', 'width', 'height', 'isInViewConfig', 'effect', 'config']
 
 export const getMotionProps = (props = {}, allowedProps = ALLOWED_MOTION_PROPS)  => {
     const motionPropsList = allowedProps; // Add more motion-related props here

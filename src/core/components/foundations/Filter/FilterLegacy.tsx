@@ -19,13 +19,12 @@ const DEFAULT_GRADIENT_CONFIG = {
   color2: "rgba(0,0,0, 0.9)",
 };
 
-const getGradientType = (type, incomingConfig = DEFAULT_GRADIENT_CONFIG) => {
-  const config = { ...DEFAULT_GRADIENT_CONFIG, ...incomingConfig }
+const getGradientType = (type, config = DEFAULT_GRADIENT_CONFIG) => {
   const gradients = {
     linear: `linear-gradient(${config.direction}, ${config.color1}, ${config.color2})`,
     radial: `radial-gradient(${config.color1}, ${config.color2})`,
   };
-  return gradients[type ?? "linear"];
+  return gradients[type ?? "radial"];
 };
 
 const shapes = {
@@ -46,23 +45,21 @@ const effects = {
 };
 
 const effectLayers: any = {
-  blur: ({config }) => (
+  'blur': () => (
     <Box
       position="absolute"
       w="100%"
       h="100%"
-      top="0"
-      backdropFilter={`blur(${config.blur}px)`}
+      backdropFilter="blur(6px)"
       // bg={getGradientType(config.gradient.type, config.gradient ?? DEFAULT_GRADIENT_CONFIG)}
     />
   ),
-  "linear-gradient": ({config }) => (
+  "linear-gradient": ({config}) => (
     <Box
       position="absolute"
       w="100%"
       h="100%"
-      top="0"
-      bg={getGradientType(config.gradient.type, config.gradient ?? DEFAULT_GRADIENT_CONFIG)}
+      bg={getGradientType(config.type, config ?? DEFAULT_GRADIENT_CONFIG)}
     />
   ),
 };
@@ -73,13 +70,13 @@ const effectLayers: any = {
  * @param param0
  * @returns
  */
-export const Filter: FC<FilterComponentProps & any> = ({
+export const FilterLegacy: FC<FilterComponentProps & any> = ({
   shape = "none",
   effect = "none", // or ['linear-gradient', 'blur', '']
   disabled = false,
   CustomFilter = undefined,
   children,
-  config = { gradient: DEFAULT_GRADIENT_CONFIG, blur: 4 },
+  config = { gradient: DEFAULT_GRADIENT_CONFIG },
   ...props
 }) => {
   const {
@@ -94,8 +91,9 @@ export const Filter: FC<FilterComponentProps & any> = ({
         effects.includes(current) ? [...prev, current] : [...prev],
       []
     );
-    return newEffects;
+    return newEffects
   }, [effect]);
+  // const [enabledEffects, setEnabledEffects] = useState(Array.isArray(effect) ? effect : [effect])
 
   if (disabled) {
     return <>{children}</>;
@@ -180,19 +178,9 @@ export const Filter: FC<FilterComponentProps & any> = ({
   }, [props.show]);
 
   return (
-    <Box
-      ref={ref}
-      clipPath={finalShape}
-      transition="ease-in"
-      position="relative"
-      height="100%"
-      width="100%"
-      {...props}
-    >
+    <Box ref={ref} clipPath={finalShape} transition="ease-in" position="relative" height="100%" width="100%" {...props}>
+      {enabledEffects.map( (name) => effectLayers[name]({ config: config.gradient }))}
       {children}
-      {enabledEffects.map((name) =>
-        effectLayers[name]({ config })
-      )}
     </Box>
   );
 };

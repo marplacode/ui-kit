@@ -1,15 +1,13 @@
 import { Box, HStack } from "@chakra-ui/react";
-import { Line } from "@components/layout";
-import { Text } from "@components/typography";
 import type { Meta, StoryObj } from "@storybook/react";
-import { fn } from "@storybook/test";
-import { Filter } from ".";
+import { Filter } from "./Filter";
+import {Text }from '../../typography/Text/Text'
 
 const Scene = (props: any) => {
   return (
     <HStack>
-      <Filter>
-        <Text fontSize={"8rem"} fontWeight="600" direction="bottom" color="yellow" show={props.show}>
+      <Filter {...props}>
+        <Text fontSize={"8rem"} fontWeight="600" direction="bottom" color="grey" show={props.show}>
           A
         </Text>
       </Filter>
@@ -34,7 +32,7 @@ const meta: any = {
   argTypes: {},
   // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args
   args: { onClick: (a: any) => console.log(a) },
-} satisfies Meta<typeof Line>;
+} satisfies Meta<any>;
 
 export default meta;
 // type Story = StoryObj<typeof meta>;
@@ -46,3 +44,16 @@ export const Appearing: any = {
     direction: "bottom",
   },
 };
+
+export const MultipleEffects: any = {
+  args: {
+    show: true,
+    // direction: "bottom",
+    effect: ['linear-gradient','blur'],
+    config: { blur: 3, gradient: { type:'linear',  direction: "to top",
+    color1: "rgba(0,0,0, 0)",
+    color2: "rgba(0,0,0, 0.1)"
+  }}
+  },
+};
+

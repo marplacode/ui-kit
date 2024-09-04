@@ -2,13 +2,39 @@ import { Box } from "@chakra-ui/react";
 import { useCalculateNodeSize } from "@hooks/useCalculateNodeSize";
 import { MotionBoxProps } from "@commonTypes/HiddenBox";
 import { motion, useInView } from "framer-motion";
-import { FC, useMemo } from "react";
+import { FC, useEffect, useMemo, useRef, useState } from "react";
 import { useGlobalConfig } from "@context/Provider";
 import { CUBIC_MOTION_FUNCTION_1 } from "@config";
 
 const MotionBox2 = motion(Box);
 
 const showPosition = { x: 0, y: 0 };
+
+
+
+function useIsInView(ref: React.RefObject<HTMLElement>, enabled = true): boolean {
+  const [isInView, setIsInView] = useState(false);
+
+  useEffect(() => {
+    if (!enabled || !ref.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      { threshold: 0.1 } // Adjust threshold as needed
+    );
+
+    observer.observe(ref.current);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [ref, enabled]);
+
+  return isInView;
+}
+
 
 export const MotionBox: FC<MotionBoxProps> = ({
   children,
@@ -22,6 +48,7 @@ export const MotionBox: FC<MotionBoxProps> = ({
   easingValues = CUBIC_MOTION_FUNCTION_1,
   isInViewConfig = {},
   initialValues = undefined,
+  visibleBg = 'transparent'
   // config = { inView: {}, animation: {}, etc configs...  }
 }) => {
   // globalMotionConfig = useContext UiKitProvider
@@ -47,8 +74,11 @@ export const MotionBox: FC<MotionBoxProps> = ({
     ref: childrenRef,
     size: { width, height },
   } = useCalculateNodeSize({ formatToPixels: true });
-  const isInView = useInView(childrenRef, isInViewConfig);
+  const visibleBoxRef = useRef(null)
+  // const isInView = useInView(childrenRef, isInViewConfig);
+  const isInView = useIsInView(visibleBoxRef, showInView);
   const { transition: globalTransitionConfig } = useGlobalConfig();
+
 
   const calculateAnimation = useMemo(() => {
     if (animationDisabled) {
@@ -58,7 +88,7 @@ export const MotionBox: FC<MotionBoxProps> = ({
       return isInView ? showPosition : initialPosition;
     }
     return show ? showPosition : initialPosition;
-  }, [initialPosition, showPosition, isInView, animationDisabled, show]);
+  }, [initialPosition, showPosition, isInView, animationDisabled, show, showInView]);
 
   return (
     <Box
@@ -66,6 +96,8 @@ export const MotionBox: FC<MotionBoxProps> = ({
       display="flex"
       width={width}
       height={initialHeight}
+      bg={visibleBg}
+      ref={visibleBoxRef}
     >
       <MotionBox2
         display="flex"

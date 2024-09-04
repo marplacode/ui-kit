@@ -48,7 +48,7 @@ export const LoaderBox = ({
           />
         </MotionBox>
 
-        <Filter effect={"border"} show={show} showInView={showInView}>
+        <Filter effect={"border"} show={show} showInView={showInView} >
           {children}
         </Filter>
       </StaggerBox>

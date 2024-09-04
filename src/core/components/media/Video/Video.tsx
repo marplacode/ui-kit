@@ -40,7 +40,7 @@ export const Video: FC<MarplaCommonComponent & any> = ({
   }, [startTime, endTime]);
 
   return (
-    <Filter effect={'linear-gradient'}>
+    <Filter effect={'linear-gradient'} {...motionProps}>
     {/* //   <MotionBox width={width} height={height} {...motionProps}>
     //     <Box width={width} height={height}> */}
     <video
