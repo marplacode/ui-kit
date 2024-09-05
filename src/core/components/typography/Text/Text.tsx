@@ -28,6 +28,8 @@ export const Text = ({
   color,
   endColor,
   colorDelay,
+  textAlign,
+  flexWrap,
   // wordsTimingGap = 0,
   ...props
 }: any) => {
@@ -37,11 +39,11 @@ export const Text = ({
   //   : Array.isArray(children)
   //     ? children
   //     : null;
-  // const {ref, size }  = useCalculateNodeSize({ formatToPixels: true})
+  const {ref, size }  = useCalculateNodeSize({ formatToPixels: true})
 
   // console.log("CHILDRENN", children);
   const renderText = useCallback(
-    (incomingChildren = [], { timingGap, textAlign, flexWrap }) => {
+    (incomingChildren = [], { timingGap, textAlign, flexWrap, width }:any) => {
       // console.log('TIMING',timingGap)
       // console.log('INCOMIING CHLDREN',incomingChildren)
       return (
@@ -55,7 +57,7 @@ export const Text = ({
           letterSpacing={letterSpacing}
           delay={delay}
           textAlign={textAlign}
-          flexWrap={flexWrap ?? 'wrap'}
+          flexWrap={flexWrap}
 >
           {onRenderLetter
             ? incomingChildren.map((letter, index) =>
@@ -77,7 +79,10 @@ export const Text = ({
                     duration: 0.7,
                     ease: CUBIC_MOTION_FUNCTION_1,
                   }}
+                  width={width}
+                  textAlign={textAlign}
                   {...props}
+                  
                 >
                   {letter == " " ? <>&nbsp;</> : letter}
                 </MotionText>
@@ -111,20 +116,34 @@ export const Text = ({
       return result;
     };
 
+    console.log('SIZEEEE',size)
+
     return (
       <Box 
-      // ref={ref}
+      w={'100%'}
       >
-        {splitText(children, wordsPerParagraph).map((paragraph, index) =>
+        {/* DUMB COMPONENT TO CALCULATE WIDTH */}
+        <Box ref={ref} w={'100%'}/>
+        {size.width && 
+        splitText(children, wordsPerParagraph).map((paragraph, index) =>
+        renderText([paragraph.split("")], {
+          timingGap: 0.05 + index * timingGap,
+          textAlign: textAlign ?? "justify",
+          flexWrap: 'wrap',
+          width: size.width
+        })
+      )
+        }
+        {/* {splitText(children, wordsPerParagraph).map((paragraph, index) =>
           renderText([paragraph.split("")], {
             timingGap: 0.05 + index * timingGap,
-            textAlign: "justify",
+            textAlign: textAlign ?? "justify",
             flexWrap: 'wrap'
           })
-        )}
+        )} */}
       </Box>
     );
   }
 
-  return renderText(children.split(""), timingGap);
+  return renderText(children.split(""), { timingGap, textAlign, flexWrap });
 };

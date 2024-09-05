@@ -2,20 +2,26 @@ import type { StoryObj } from "@storybook/react";
 import { LoaderBox } from "./LoaderBox";
 import { Image } from "@components/media";
 import ExampleImage from "../../../../stories/assets/example.png";
+import React from "react";
+import { Box, HStack } from "@chakra-ui/react";
 
 const Scene = ({ show }: any) => {
   return (
-    <LoaderBox show={show}>
-      <Image
-        src={ExampleImage}
-        direction="right"
-        width={"300px"}
-        height={"300px"}
-        // effect="breathing"
-        show={show}
-        delay={0.5}
-      />
-    </LoaderBox>
+    <HStack w="100vw" justifyContent="center" bg="black">
+      <Box px="20" w="50%">
+        <LoaderBox show={show} w="100%">
+          <Image
+            src={ExampleImage}
+            direction="right"
+            // width={"300px"}
+            height={"300px"}
+            // effect="breathing"
+            show={show}
+            delay={0.8}
+          />
+        </LoaderBox>
+      </Box>
+    </HStack>
   );
 };
 
