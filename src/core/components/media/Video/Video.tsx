@@ -11,6 +11,7 @@ export const Video: FC<MarplaCommonComponent & any> = ({
   src,
   shape,
   effect,
+  loop = true,
   startTime,
   endTime,
   ...props
@@ -26,7 +27,12 @@ export const Video: FC<MarplaCommonComponent & any> = ({
 
     const handleTimeUpdate = () => {
       if (endTime && videoElement.currentTime >= endTime) {
-        videoElement.pause();
+        if(loop) {
+          videoElement.currentTime = startTime
+        } else {
+          videoElement.pause();
+        }
+        
       }
     };
 
@@ -44,7 +50,7 @@ export const Video: FC<MarplaCommonComponent & any> = ({
     {/* //   <MotionBox width={width} height={height} {...motionProps}>
     //     <Box width={width} height={height}> */}
     <video
-      loop
+      loop={loop}
       autoPlay
       muted
       preload="auto"

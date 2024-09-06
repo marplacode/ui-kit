@@ -1,13 +1,22 @@
 import { Box, HStack, Text } from "@chakra-ui/react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Video } from "./Video";
+import ExampleVideo from '@stories/assets/liquidd.mp4'
 
 const Scene = (props: any) => {
   return (
     <HStack>
       {/* <h1>MARPLACODE;</h1>   */}
       {/* <div style={{height: '20px', width: '20px', backgroundColor: 'red'}}/> */}
-      <Video />
+      <Video
+        src={ExampleVideo}
+        height='100%'
+        width='100%'
+        effect='linear-gradient'
+        config={{ gradient: { color2: '#000' } }}
+        startTime={2}
+        endTime={6}
+      />
 
     </HStack>
   );
