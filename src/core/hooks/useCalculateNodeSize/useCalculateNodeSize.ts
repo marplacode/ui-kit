@@ -1,12 +1,12 @@
-import { useState, useRef, useLayoutEffect, useEffect, useMemo } from "react";
+import { useState, useRef, useLayoutEffect } from "react";
 
 
 export const useCalculateNodeSize = ({ initialRef = null, formatToPixels = false } = {}) => {
   const internalRef = useRef(null);
   const ref = initialRef || internalRef
-  const [size, setDimensions] = useState({ width: 0, height: 0 });
+  const [size, setDimensions] = useState<{ width: number | string, height: number | string }>({ width: 0, height: 0 });
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const node = ref.current;
 
     if (node) {
