@@ -1,12 +1,18 @@
+import { useBackgroundLoaderControls } from "@context/Provider"
+
 export const useRouter = (routerInstance, { backgroundLoaderControls = null }) => {
+  const backgroundLoaderControlsContext = useBackgroundLoaderControls()
+  const transitionControls =  backgroundLoaderControlsContext ?? backgroundLoaderControls
   const router = routerInstance
 
-  const push = (path) => {
-      backgroundLoaderControls.current.show(nextProject)
+  const push = (url, config) => {
+    transitionControls.current.show({ url })
 
-
-      router.push()
   }
 
-  return { push }
+  const go = (url) => {
+    router.push(url)
+  }
+
+  return { push, go }
 }

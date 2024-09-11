@@ -1,39 +1,48 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useRef, useCallback } from "react";
 
-// TODO
-// add both hooks on implementation and on other side
-// Handle imperative show/hide API for motion box
-export function useMotionControls() {
-  const controlsRef = useRef(null);
+export const AVAILABLE_MOTION_STATES = ["show", "hide"];
 
-  // Imperative API callback controls
-  useEffect(() => {
-    if (!controlsRef) return;
-    if (controlsRef.current == null) {
-      controlsRef.current = {
-        metadata: {},
-        loadMetadata: (metadata) => {
-          controlsRef.current.metadata = metadata;
-        },
-        show: (metadata) => {
-          controlsRef.current.loadMetadata(metadata);
-        },
-        hide: (metadata) => {
-          controlsRef.current.loadMetadata(metadata);
-        },
-      };
-    }
-  }, [controlsRef]);
+export const useMotionControls = () => {
+  const callbacksRef = useRef({
+    show: [],
+    hide: [],
+  });
+  const metadataRef = useRef(null); // Ref to store metadata
 
-  const show = useCallback(
-    (metadata) => controlsRef.current.show(metadata),
-    []
-  );
+  // Subscribe to the show or hide events
+  const subscribe = useCallback((event, callback) => {
+    if (!AVAILABLE_MOTION_STATES.includes(event)) return;
 
-  const hide = useCallback(
-    (metadata) => controlsRef.current.hide(metadata),
-    []
-  );
+    callbacksRef.current[event].push(callback);
 
-  return { show, hide, controlsRef };
-}
+    // Return a function to unsubscribe the callback
+    return () => {
+      callbacksRef.current[event] = callbacksRef.current[event].filter(
+        (cb) => cb !== callback
+      );
+    };
+  }, []);
+
+  // Unsubscribe a callback from the show or hide events
+  const unsubscribe = useCallback((event, callback) => {
+    if (!AVAILABLE_MOTION_STATES.includes(event)) return;
+
+    callbacksRef.current[event] = callbacksRef.current[event].filter(
+      (cb) => cb !== callback
+    );
+  }, []);
+
+  // Trigger all callbacks for the show event
+  const show = useCallback((metadata = {}) => {
+    metadataRef.current = metadata;
+    callbacksRef.current.show.forEach((callback) => callback(metadata));
+  }, []);
+
+  // Trigger all callbacks for the hide event
+  const hide = useCallback((metadata = {}) => {
+    metadataRef.current = metadata;
+    callbacksRef.current.hide.forEach((callback) => callback(metadata));
+  }, []);
+
+  return { show, hide, metadata: metadataRef, subscribe, unsubscribe };
+};

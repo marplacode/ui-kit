@@ -52,6 +52,7 @@ export const BackgroundLoader = forwardRef(
       variation = "sliding",
       onAnimationEnd = () => {},
       controlsRef,
+      controls,
       ...props
     }: any,
     ref: any
@@ -59,8 +60,6 @@ export const BackgroundLoader = forwardRef(
     const [isLoaded, setIsLoaded] = useState(!initialShow);
     const maxIndex = useMaxZIndex();
     const [repeatCounter, setRepeatCounter] = useState(0);
-
-    console.log("M<AXXXX", maxIndex);
 
     //  autochange logic
     useEffect(() => {
@@ -90,27 +89,15 @@ export const BackgroundLoader = forwardRef(
       };
     }, [show]);
 
-    // Imperative API callback controls
     useEffect(() => {
-      console.log("REFF", ref);
-      if (!controlsRef) return;
-      if (controlsRef.current == null) {
-        controlsRef.current = {
-          metadata: {},
-          loadMetadata: (metadata) => { 
-            controlsRef.current.metadata = metadata
-          },
-          show: (metadata) => {
-            setIsLoaded(false);
-            controlsRef.current.loadMetadata(metadata)
-          },
-          hide: (metadata) => {
-            setIsLoaded(true);
-            controlsRef.current.loadMetadata(metadata)
-          },
-        };
-      }
-    }, [controlsRef]);
+      if (!controls) return () => {};
+      controls.subscribe("show", () => {
+        setIsLoaded(false);
+      });
+      controls.subscribe("hide", () => {
+        setIsLoaded(true);
+      });
+    }, [controls]);
 
     const Variation = useMemo(() => VARIATIONS[variation], [variation]);
 
@@ -120,7 +107,9 @@ export const BackgroundLoader = forwardRef(
         <Variation
           show={isLoaded}
           zIndex={maxIndex}
-          onAnimationEnd={() => onAnimationEnd({ isLoaded, metadata: controlsRef.current.metadata })}
+          onAnimationEnd={() =>
+            onAnimationEnd({ isLoaded, metadata: controls.metadata.current })
+          }
           {...props}
         />,
         document.body
@@ -128,5 +117,3 @@ export const BackgroundLoader = forwardRef(
     );
   }
 );
-
-// export const BackgroundLoader =  ()=> <></>

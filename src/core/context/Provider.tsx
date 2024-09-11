@@ -1,6 +1,7 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import { BackgroundLoader } from "@components";
 import { CUBIC_MOTION_FUNCTION_1 } from "@config/definitions";
+import { useMotionControls } from "@hooks/useMotionControls";
 import { useRouter } from "@hooks/useRouter";
 import { createContext, useContext, useMemo, useRef } from "react";
 import { theme as defaultTheme } from "../theme";
@@ -22,11 +23,12 @@ const UiKitProviderContext = createContext(initialState);
 export const UiKitProvider = ({
   theme = defaultTheme,
   config = initialConfig,
-  router = null,
+  router: routerInstance = null,
   children,
 }) => {
   const backgroundLoaderControls = useRef(null);
-  const { push } = useRouter(router, { backgroundLoaderControls });
+  const controls = useMotionControls()
+  // const router = useRouter(routerInstance, { backgroundLoaderControls });
   const state = useMemo( () => ({ backgroundLoaderControls, config}), [config, backgroundLoaderControls.current])
 
   return (
@@ -40,8 +42,8 @@ export const UiKitProvider = ({
           repeat={1}
           show={false}
           onAnimationEnd={({ metadata }) => {
-            if (metadata?.path) {
-              router.push(metadata.path);
+            if (metadata?.url) {
+              router.go(metadata.url);
               backgroundLoaderControls.current.hide();
             }
           }}
