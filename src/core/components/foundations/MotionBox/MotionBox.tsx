@@ -3,8 +3,8 @@ import { useCalculateNodeSize } from "@hooks/useCalculateNodeSize";
 import { MotionBoxProps } from "@commonTypes/HiddenBox";
 import { motion, useInView } from "framer-motion";
 import { FC, useEffect, useMemo, useRef, useState } from "react";
-import { useGlobalConfig } from "@context/Provider";
 import { CUBIC_MOTION_FUNCTION_1 } from "@config";
+import { useUiKit } from "@hooks/useUiKit";
 
 const MotionBox2 = motion(Box);
 
@@ -77,8 +77,8 @@ export const MotionBox: FC<MotionBoxProps> = ({
   const visibleBoxRef = useRef(null)
   // const isInView = useInView(childrenRef, isInViewConfig);
   const isInView = useIsInView(visibleBoxRef, showInView);
-  const { transition: globalTransitionConfig } = useGlobalConfig();
-
+  const store:any = useUiKit();
+  const globalTransitionConfig = store.config.transition
 
   const calculateAnimation = useMemo(() => {
     if (animationDisabled) {

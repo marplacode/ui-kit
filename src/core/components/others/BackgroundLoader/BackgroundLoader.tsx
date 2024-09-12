@@ -51,12 +51,14 @@ export const BackgroundLoader = forwardRef(
       repeat = 2,
       variation = "sliding",
       onAnimationEnd = () => {},
-      controlsRef,
       controls,
+      // disabled: initDisabled = false,
+      disabled = false,
       ...props
     }: any,
     ref: any
   ) => {
+    // const [disabled, setDisabled] = useState(initDisabled)
     const [isLoaded, setIsLoaded] = useState(!initialShow);
     const maxIndex = useMaxZIndex();
     const [repeatCounter, setRepeatCounter] = useState(0);
@@ -90,13 +92,18 @@ export const BackgroundLoader = forwardRef(
     }, [show]);
 
     useEffect(() => {
+      console.log('controls 11',controls)
       if (!controls) return () => {};
       controls.subscribe("show", () => {
+        console.log('SHOOOOWWWWWW')
         setIsLoaded(false);
       });
       controls.subscribe("hide", () => {
         setIsLoaded(true);
       });
+      // controls.subscribe("disable", () => {
+      //   setDisabled(true);
+      // });
     }, [controls]);
 
     const Variation = useMemo(() => VARIATIONS[variation], [variation]);
@@ -106,6 +113,7 @@ export const BackgroundLoader = forwardRef(
       ReactDOM.createPortal(
         <Variation
           show={isLoaded}
+          disabled={disabled}
           zIndex={maxIndex}
           onAnimationEnd={() =>
             onAnimationEnd({ isLoaded, metadata: controls.metadata.current })

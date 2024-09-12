@@ -1,21 +1,31 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
-import React, { useEffect, useRef } from "react";
+import React, { createContext, useContext, useEffect, useRef, useState } from "react";
 import { BackgroundLoader } from "./BackgroundLoader";
 import { useMotionControls } from "../../../hooks/useMotionControls";
+import { useRouter } from "../../../hooks/useRouter";
 
 const Scene = (props: any) => {
+  const router = useRouter({ transition: { enabled: true } })
+  // const router = useRouter()
   const controls = useMotionControls()
   const newProps = props.imperative
     ? { controls, ...props }
     : props;
+
   return (
     <>
-      <BackgroundLoader {...newProps} />
-      <button onClick={() => controls.show({essooo: '112312'})}>SHOW</button>
+      {/* <BackgroundLoader {...newProps} /> */}
+      <button onClick={() => { 
+        
+        router.push('ads')
+        // controls.show({essooo: '112312'})
+        
+        }}>SHOW</button>
       <button
         onClick={() => {
-          controls.hide();
+          // controls.hide();
+          router.back()
         }}
       >
         HIDE

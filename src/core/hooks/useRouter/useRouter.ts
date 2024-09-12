@@ -1,18 +1,35 @@
-import { useBackgroundLoaderControls } from "@context/Provider"
+import { useCallback, useEffect } from "react";
+import { useUiKit } from "../useUiKit";
 
-export const useRouter = (routerInstance, { backgroundLoaderControls = null }) => {
-  const backgroundLoaderControlsContext = useBackgroundLoaderControls()
-  const transitionControls =  backgroundLoaderControlsContext ?? backgroundLoaderControls
-  const router = routerInstance
+export const useRouter = (config = null) => {
+  const context:any = useUiKit();
 
-  const push = (url, config) => {
-    transitionControls.current.show({ url })
+  const push = useCallback(
+    (url) => {
+      console.log("push", context);
+      context.config.router.transition.controls.show({ url });
+    },
+    [context]
+  );
 
-  }
+  const back = useCallback(
+    (url) => {
+      console.log("back", context);
+      context.config.router.transition.controls.hide({ back: true });
+    },
+    [context]
+  );
 
-  const go = (url) => {
-    router.push(url)
-  }
+  useEffect(() => {
+    console.log("context changee", context);
+    console.log("config", config);
+    if(config) {
+      // context.disableRouterTransition()
+      context.updateRouterConfig(config);
+    }
+    
+    // context.config.router.routeTransition.controls.hide({ back: true });
+  }, [JSON.stringify(config)]);
 
-  return { push, go }
-}
+  return { push, back };
+};

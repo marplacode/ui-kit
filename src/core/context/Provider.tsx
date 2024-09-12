@@ -1,77 +1,67 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import { BackgroundLoader } from "@components";
-import { CUBIC_MOTION_FUNCTION_1 } from "@config/definitions";
 import { useMotionControls } from "@hooks/useMotionControls";
-import { useRouter } from "@hooks/useRouter";
-import { createContext, useContext, useMemo, useRef } from "react";
+import { useUiKit } from "@hooks/useUiKit";
 import { theme as defaultTheme } from "../theme";
-
-const initialConfig = {
-  global: {
-    transition: { delay: 0, duration: 0.4, ease: CUBIC_MOTION_FUNCTION_1 },
-  },
-}
-
-const initialState = {
-  backgroundLoaderControls: null,
-  config: initialConfig
-};
-
-
-const UiKitProviderContext = createContext(initialState);
+import { useEffect, useMemo } from "react";
+import { initialConfig, useUiKitStore } from "@store/store";
 
 export const UiKitProvider = ({
   theme = defaultTheme,
-  config = initialConfig,
+  config = null,
   router: routerInstance = null,
   children,
 }) => {
-  const backgroundLoaderControls = useRef(null);
-  const controls = useMotionControls()
-  // const router = useRouter(routerInstance, { backgroundLoaderControls });
-  const state = useMemo( () => ({ backgroundLoaderControls, config}), [config, backgroundLoaderControls.current])
+  const controls = useMotionControls();
+  const initRouter = useUiKitStore((state: any) => state.initRouter);
+  const storeRouteTransitionEnabled = useUiKitStore(
+    (state: any) => state.config.router.transition.enabled
+  );
+  // if config was override that that value first
+  const routeTransitionEnabled = useMemo(
+    () =>
+      storeRouteTransitionEnabled
+        ? storeRouteTransitionEnabled
+        : typeof config?.router?.transition?.enabled === "boolean"
+          ? config?.router?.transition?.enabled
+          : true,
+    [storeRouteTransitionEnabled, config]
+  );
+
+  console.log("DISABLED", routeTransitionEnabled);
+
+  console.log("ADSADSADSADSADSA");
+
+  //  // Initialize controls when the component mounts
+  useEffect(() => {
+    initRouter({ controls });
+  }, [initRouter]);
+
+  useEffect(() => {
+    if (routerInstance?.asPath) {
+      controls.hide();
+    }
+  }, [routerInstance?.asPath]);
 
   return (
     <ChakraProvider theme={theme}>
-      <UiKitProviderContext.Provider value={state}>
-        <BackgroundLoader
-          controlsRef={backgroundLoaderControls}
-          variation="sliding"
-          direction="left"
-          autoChange={false}
-          repeat={1}
-          show={false}
-          onAnimationEnd={({ metadata }) => {
-            if (metadata?.url) {
-              router.go(metadata.url);
-              backgroundLoaderControls.current.hide();
-            }
-          }}
-        />
-        {children}
-      </UiKitProviderContext.Provider>
+      <BackgroundLoader
+        controls={controls}
+        variation="sliding"
+        direction="left"
+        autoChange={false}
+        repeat={1}
+        show={false}
+        disabled={!routeTransitionEnabled}
+        // disabled={false}
+        onAnimationEnd={({ metadata }) => {
+          if (metadata?.url) {
+            routerInstance.push(metadata.url);
+            // controls.hide();
+          }
+        }}
+      />
+      {children}
     </ChakraProvider>
   );
-};
-
-export const useUiKit = () => {
-  const context = useContext(UiKitProviderContext);
-
-  if (context === undefined) {
-    throw new Error("UiKit hooks must be use inside UiKitProvider");
-  }
-
-  return context;
-};
-
-export const useGlobalConfig = () => {
-  const context = useUiKit();
-
-  return context.config.global;
-};
-
-export const useBackgroundLoaderControls = () => {
-  const context = useContext(UiKitProviderContext);
-
-  return context.backgroundLoaderControls;
 };

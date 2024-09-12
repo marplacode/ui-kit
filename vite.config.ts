@@ -18,6 +18,7 @@ export default defineConfig({
       "@components": path.resolve(__dirname, "/src/core/components"),
       "@hooks": path.resolve(__dirname, "/src/core/hooks"),
       "@context": path.resolve(__dirname, "/src/core/context"),
+      "@store": path.resolve(__dirname, "/src/core/store"),
       "@commonTypes": path.resolve(__dirname, "/src/core/types"),
       "@utils": path.resolve(__dirname, "/src/core/utils"),
       "@config": path.resolve(__dirname, "/src/core/config"),
