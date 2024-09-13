@@ -34,8 +34,8 @@ export const UiKitProvider = ({
 
   //  // Initialize controls when the component mounts
   useEffect(() => {
-    initRouter({ controls });
-  }, [initRouter]);
+    initRouter({ controls, instance: routerInstance });
+  }, [initRouter, routerInstance]);
 
   useEffect(() => {
     if (routerInstance?.asPath) {

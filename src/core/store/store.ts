@@ -5,6 +5,7 @@ import { CUBIC_MOTION_FUNCTION_1 } from "../config/definitions";
 export const initialConfig = {
   transition: { delay: 0, duration: 0.4, ease: CUBIC_MOTION_FUNCTION_1 },
   router: {
+    instance: null,
     transition: {
       controls: null, // To be filled with control methods (show, hide, etc.)
       enabled: null,  // Enable/disable router transitions
@@ -18,12 +19,13 @@ export const useUiKitStore = create((set) => ({
   config: initialConfig,
 
   // Action: Initialize router controls with a given controls object
-  initRouter: ({controls}) =>
+  initRouter: ({controls, instance}) =>
     set((state) => ({
       config: {
         ...state.config,
         router: {
           ...state.config.router,
+          instance,
           transition: {
             ...state.config.router.transition,
             controls,

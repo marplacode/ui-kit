@@ -3,33 +3,31 @@ import { useUiKit } from "../useUiKit";
 
 export const useRouter = (config = null) => {
   const context:any = useUiKit();
+  const router = context.config.router
+  const instance = router.instance ?? {}
 
   const push = useCallback(
     (url) => {
+      if(url === router.instance.asPath) return
       console.log("push", context);
-      context.config.router.transition.controls.show({ url });
+      router.transition.controls.show({ url });
     },
     [context]
   );
 
   const back = useCallback(
-    (url) => {
+  (url) => {
       console.log("back", context);
-      context.config.router.transition.controls.hide({ back: true });
+      router.transition.controls.hide({ back: true });
     },
     [context]
   );
 
   useEffect(() => {
-    console.log("context changee", context);
-    console.log("config", config);
     if(config) {
-      // context.disableRouterTransition()
       context.updateRouterConfig(config);
     }
-    
-    // context.config.router.routeTransition.controls.hide({ back: true });
   }, [JSON.stringify(config)]);
 
-  return { push, back };
+  return { instance, push, back  };
 };
