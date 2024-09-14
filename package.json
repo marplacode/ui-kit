@@ -1,7 +1,24 @@
 {
   "name": "@marplacode/ui-kit",
-  "private": false,
+  "private": false, 
+  "author": "Agustin Salinas",
   "version": "0.0.1",
+  "homepage": "https://github.com/marplacode/ui-kit",
+  "keywords": [
+    "motion-ui",
+    "animation",
+    "composable",
+    "motion",
+    "react",
+    "ease",
+    "ready-to-use",
+    "typescript",
+    "polish"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/marplacode/ui-kit"
+  },
   "files": [
     "dist",
     "src/core/hooks"
