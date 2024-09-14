@@ -1,10 +1,9 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import { BackgroundLoader } from "@components";
 import { useMotionControls } from "@hooks/useMotionControls";
-import { useUiKit } from "@hooks/useUiKit";
 import { theme as defaultTheme } from "../theme";
 import { useEffect, useMemo } from "react";
-import { initialConfig, useUiKitStore } from "@store/store";
+import { useUiKitStore } from "@store/store";
 
 export const UiKitProvider = ({
   theme = defaultTheme,
@@ -28,10 +27,6 @@ export const UiKitProvider = ({
     [storeRouteTransitionEnabled, config]
   );
 
-  console.log("DISABLED", routeTransitionEnabled);
-
-  console.log("ADSADSADSADSADSA");
-
   //  // Initialize controls when the component mounts
   useEffect(() => {
     initRouter({ controls, instance: routerInstance });
@@ -53,11 +48,9 @@ export const UiKitProvider = ({
         repeat={1}
         show={false}
         disabled={!routeTransitionEnabled}
-        // disabled={false}
         onAnimationEnd={({ metadata }) => {
           if (metadata?.url) {
             routerInstance.push(metadata.url);
-            // controls.hide();
           }
         }}
       />
