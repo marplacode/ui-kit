@@ -47,6 +47,7 @@
       "@components/*": ["./core/components/*"],
       "@hooks/*": ["./core/hooks/*"],
       "@context/*": ["./core/context/*"],
+      "@store/*": ["./core/store/*"],
       "@utils/*": ["./core/utils/*"],
       "@commonTypes/*": ["./core/types/*"],
       "@config/*": ["./core/config/*"],

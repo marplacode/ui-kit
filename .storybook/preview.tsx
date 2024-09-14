@@ -17,7 +17,11 @@ const preview: Preview = {
   decorators: [
     (Story) => (
       <Box height="100vh">
-        <UiKitProvider>{<Story />}</UiKitProvider>
+        <UiKitProvider 
+        config={{ router: { transition: { enabled: false } }}}
+        >
+          <Story />
+        </UiKitProvider>
       </Box>
     ),
   ],

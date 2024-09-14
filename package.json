@@ -1,13 +1,41 @@
 {
   "name": "@marplacode/ui-kit",
-  "private": true,
-  "version": "0.0.0",
+  "private": false, 
+  "author": "Agustin Salinas",
+  "version": "0.0.1",
+  "homepage": "https://github.com/marplacode/ui-kit",
+  "keywords": [
+    "motion-ui",
+    "animation",
+    "composable",
+    "motion",
+    "react",
+    "ease",
+    "ready-to-use",
+    "typescript",
+    "polish"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/marplacode/ui-kit"
+  },
   "files": [
-    "dist"
+    "dist",
+    "src/core/hooks"
   ],
   "type": "module",
   "types": "./dist/index.d.ts",
   "main": "./dist/ui-kit.es.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/ui-kit.es.js"
+    },
+    "./hooks": {
+      "types": "./src/core/hooks/index.ts",
+      "default": "./src/core/hooks/index.ts"
+    }
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
@@ -28,9 +56,9 @@
     "@storybook/theming": "^8.2.7",
     "framer-motion": "^11.3.2",
     "glob": "^11.0.0",
-    "next-mdx-remote": "^5.0.0",
     "react": "^18.1.0",
-    "react-dom": "^18.1.0"
+    "react-dom": "^18.1.0",
+    "zustand": "^4.5.5"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^1.6.1",

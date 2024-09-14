@@ -2,20 +2,40 @@ import type { StoryObj } from "@storybook/react";
 import { LoaderBox } from "./LoaderBox";
 import { Image } from "@components/media";
 import ExampleImage from "../../../../stories/assets/example.png";
+import React from "react";
+import { Box, HStack } from "@chakra-ui/react";
 
-const Scene = ({ show }: any) => {
+const Scene = ({ show , two, imageProps, ...rest}: any) => {
   return (
-    <LoaderBox show={show}>
-      <Image
-        src={ExampleImage}
-        direction="right"
-        width={"300px"}
-        height={"300px"}
-        // effect="breathing"
-        show={show}
-        delay={0.5}
-      />
-    </LoaderBox>
+    <HStack w="100vw" justifyContent="center" bg="black">
+      <HStack px="20" w="50%"> 
+        <LoaderBox show={show} w="100%" {...rest}>
+          <Image
+            src={ExampleImage}
+            direction="right"
+            // width={"300px"}
+            height={"300px"}
+            // effect="breathing"
+            show={show}
+            delay={0.8}
+            {...imageProps}
+          />
+        </LoaderBox>
+{two && <LoaderBox show={show} w="100%" {...rest}>
+          <Image
+            src={ExampleImage}
+            direction="right"
+            // width={"300px"}
+            height={"300px"}
+            // effect="breathing"
+            show={show}
+            delay={0.8}
+            {...imageProps}
+          />
+        </LoaderBox>}
+        
+      </HStack>
+    </HStack>
   );
 };
 
@@ -47,8 +67,19 @@ export default meta;
 type Story = StoryObj<any>;
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
-export const Imasge: any = {
+export const WithImage: any = {
   args: {
     show: true,
+  },
+};
+
+export const Two: any = {
+  args: {
+    show: true,
+    two: true,
+    imageProps: {
+      delay: 6
+    },
+    delay: 2
   },
 };
