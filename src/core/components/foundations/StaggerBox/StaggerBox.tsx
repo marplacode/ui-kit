@@ -16,9 +16,10 @@ export const StaggerBox = ({
   letterSpacing = "0rem",
   show: initialShow,
   textAlign,
+  flexWrap,
   ...props
 }:any) => {
-  const { delay, ...rest } = props
+  const { delay,...rest } = props
   const [show, setShow] = useState(!initialShow)
   const children = Array.isArray(initialChildren) ? initialChildren : [initialChildren]
   
@@ -46,7 +47,8 @@ export const StaggerBox = ({
     <Stack direction={stackDirection as any}
      letterSpacing={letterSpacing} 
      spacing={0}
-    //  justifyItems={textAlign}
+     textAlign={textAlign}
+     flexWrap={flexWrap}
     >
       {children.map((child, index) => (
         <MotionBox delay={0.05 + index * (timingGap / 100)} show={show} {...rest}>

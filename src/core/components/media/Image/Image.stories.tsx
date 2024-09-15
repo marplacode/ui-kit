@@ -1,4 +1,4 @@
-import { Box, HStack, Text } from "@chakra-ui/react";
+import { Box, HStack, Text, VStack } from "@chakra-ui/react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
 import { Image } from ".";
@@ -6,10 +6,12 @@ import { Image } from ".";
 import ExampleImage from '@stories/assets/example.png'
 
 const Scene = (props: any) => {
+  console.log('sdas',props)
   return (
-    <HStack>
+    <VStack spacing="0">
+      { props.showInView && <Box h="100vh" w="100%" bg="black" /> }
      <Image  src={ExampleImage} {...props}/>
-    </HStack>
+    </VStack>
   );
 };
 
@@ -66,5 +68,15 @@ export const BreathingFilter: any = {
     effect: 'breathing'
   },
 };
+
+export const ShowInView: any = {
+  args: {
+    showInView: true,
+    direction: "top",
+    width: 300,
+    height: 300,
+  },
+};
+
 
 

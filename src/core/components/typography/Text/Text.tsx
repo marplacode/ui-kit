@@ -1,11 +1,11 @@
 import { Text as CText, Box } from "@chakra-ui/react";
 import { StaggerBox } from "@components/foundations/StaggerBox";
 import { CUBIC_MOTION_FUNCTION_1 } from "@config/definitions";
-import {  motion } from "framer-motion";
-import { useCallback } from "react";
+import { useCalculateNodeSize } from "@hooks/useCalculateNodeSize";
+import { motion } from "framer-motion";
+import { useCallback, useRef } from "react";
 
-
-const MotionText = motion(CText)
+const MotionText = motion(CText);
 
 export const MOTION_TEXT_TIMING_GAP = {
   slow: 20,
@@ -28,19 +28,22 @@ export const Text = ({
   color,
   endColor,
   colorDelay,
+  textAlign,
+  flexWrap,
   // wordsTimingGap = 0,
   ...props
-}:any) => {
+}: any) => {
   // const newChildren = children;
   // typeof children == "string"
   //   ? children.split("")
   //   : Array.isArray(children)
   //     ? children
   //     : null;
+  const {ref, size }  = useCalculateNodeSize({ formatToPixels: true})
 
   // console.log("CHILDRENN", children);
   const renderText = useCallback(
-    (incomingChildren = [], timingGap) => {
+    (incomingChildren = [], { timingGap, textAlign, flexWrap, width }:any) => {
       // console.log('TIMING',timingGap)
       // console.log('INCOMIING CHLDREN',incomingChildren)
       return (
@@ -53,8 +56,9 @@ export const Text = ({
           easingValues={easingValues}
           letterSpacing={letterSpacing}
           delay={delay}
-          // textAlign={textAlign}
-        >
+          textAlign={textAlign}
+          flexWrap={flexWrap}
+>
           {onRenderLetter
             ? incomingChildren.map((letter, index) =>
                 onRenderLetter(
@@ -65,7 +69,21 @@ export const Text = ({
                 )
               )
             : incomingChildren.map((letter) => (
-                <MotionText padding={0} margin={0} initial={{color}} animate={{ color: show ? endColor : color }} transition={{ delay: colorDelay ?? 0.3, duration: 0.7, ease: CUBIC_MOTION_FUNCTION_1 }} {...props}>
+                <MotionText
+                  padding={0}
+                  margin={0}
+                  initial={{ color }}
+                  animate={{ color: show ? endColor : color }}
+                  transition={{
+                    delay: colorDelay ?? 0.3,
+                    duration: 0.7,
+                    ease: CUBIC_MOTION_FUNCTION_1,
+                  }}
+                  width={width}
+                  textAlign={textAlign}
+                  {...props}
+                  
+                >
                   {letter == " " ? <>&nbsp;</> : letter}
                 </MotionText>
               ))}
@@ -98,8 +116,34 @@ export const Text = ({
       return result;
     };
 
-    return <Box>{splitText(children, wordsPerParagraph).map( (paragraph, index) => renderText([paragraph.split("")], 0.05 + index * timingGap)) }</Box>
+    console.log('SIZEEEE',size)
+
+    return (
+      <Box 
+      w={'100%'}
+      >
+        {/* DUMB COMPONENT TO CALCULATE WIDTH */}
+        <Box ref={ref} w={'100%'}/>
+        {size.width && 
+        splitText(children, wordsPerParagraph).map((paragraph, index) =>
+        renderText([paragraph.split("")], {
+          timingGap: 0.05 + index * timingGap,
+          textAlign: textAlign ?? "justify",
+          flexWrap: 'wrap',
+          width: size.width
+        })
+      )
+        }
+        {/* {splitText(children, wordsPerParagraph).map((paragraph, index) =>
+          renderText([paragraph.split("")], {
+            timingGap: 0.05 + index * timingGap,
+            textAlign: textAlign ?? "justify",
+            flexWrap: 'wrap'
+          })
+        )} */}
+      </Box>
+    );
   }
 
-  return renderText(children.split(""), timingGap);
+  return renderText(children.split(""), { timingGap, textAlign, flexWrap });
 };

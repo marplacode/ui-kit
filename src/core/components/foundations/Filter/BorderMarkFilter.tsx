@@ -16,7 +16,7 @@ export const BorderMarkFilter: FC<MotionBoxProps> = ({
   ...props
 }:any) => {
   const thicknessOffset = `10${thickness}%`;
-console.log('WW',width)
+
   const renderLines = useCallback(
     () => (
       <VStack position="absolute" display="flex" w={width} h={height}>
@@ -75,9 +75,6 @@ console.log('WW',width)
     ),
     [width, height, show, delay]
   );
-
-  console.log("chil", childrenRef);
-  console.log("WIDDTHH", { width, height });
 
   return (
     <VStack>

@@ -20,4 +20,5 @@ export interface MotionBoxProps extends MarplaCommonComponent, PropsWithChildren
     height?: null | number,
     easingValues?: number[],
     initialValues?: {}
+    visibleBg?: 'transparent'
 } 
