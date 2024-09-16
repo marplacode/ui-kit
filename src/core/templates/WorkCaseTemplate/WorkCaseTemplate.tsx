@@ -126,8 +126,9 @@ export const WorkCaseTemplateDefault: FC<any> = ({ ...rest }) => {
               timingGap={MOTION_TEXT_TIMING_GAP.fast}
               duration={2}
               showInView
+              showOnce
             >
-              The Solution
+              Only once
             </Text>
             <HLine showInView />
             <Text

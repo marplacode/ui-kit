@@ -1,46 +1,21 @@
 import { Box } from "@chakra-ui/react";
 import { useCalculateNodeSize } from "@hooks/useCalculateNodeSize";
 import { MotionBoxProps } from "@commonTypes/HiddenBox";
-import { motion, useInView } from "framer-motion";
-import { FC, useEffect, useMemo, useRef, useState } from "react";
+import { motion } from "framer-motion";
+import { FC, useMemo, useRef } from "react";
 import { CUBIC_MOTION_FUNCTION_1 } from "@config";
 import { useUiKit } from "@hooks/useUiKit";
+import { useIsInView } from "@hooks/useIsInView";
 
 const MotionBox2 = motion(Box);
-
 const showPosition = { x: 0, y: 0 };
-
-
-
-function useIsInView(ref: React.RefObject<HTMLElement>, enabled = true): boolean {
-  const [isInView, setIsInView] = useState(false);
-
-  useEffect(() => {
-    if (!enabled || !ref.current) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsInView(entry.isIntersecting);
-      },
-      { threshold: 0.1 } // Adjust threshold as needed
-    );
-
-    observer.observe(ref.current);
-
-    return () => {
-      observer.disconnect();
-    };
-  }, [ref, enabled]);
-
-  return isInView;
-}
-
 
 export const MotionBox: FC<MotionBoxProps> = ({
   children,
   animationDisabled = false,
   show = true,
   showInView = false,
+  showOnce = false,
   direction = "top",
   delay = 0,
   duration = 0.8,
@@ -75,8 +50,7 @@ export const MotionBox: FC<MotionBoxProps> = ({
     size: { width, height },
   } = useCalculateNodeSize({ formatToPixels: true });
   const visibleBoxRef = useRef(null)
-  // const isInView = useInView(childrenRef, isInViewConfig);
-  const isInView = useIsInView(visibleBoxRef, showInView);
+  const isInView = useIsInView(visibleBoxRef, { enabled: showInView, executeOnce: showOnce });
   const store:any = useUiKit();
   const globalTransitionConfig = store.config.transition
 

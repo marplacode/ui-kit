@@ -25,6 +25,7 @@ export default defineConfig({
       "@stories": path.resolve(__dirname, "/src/stories"),
     },
   },
+  esbuild: { jsx: 'automatic' },
   plugins: [
     react(),
     dts({

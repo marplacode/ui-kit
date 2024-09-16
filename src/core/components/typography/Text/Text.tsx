@@ -18,6 +18,7 @@ export const Text = ({
   direction = "top",
   show = true,
   showInView = false,
+  showOnce= false,
   timingGap = 0,
   delay = 0,
   animationDisabled = false,
@@ -50,6 +51,7 @@ export const Text = ({
         <StaggerBox
           show={show}
           showInView={showInView}
+          showOnce={showOnce}
           timingGap={timingGap}
           direction={direction}
           animationDisabled={animationDisabled}
@@ -93,6 +95,7 @@ export const Text = ({
     [
       show,
       showInView,
+      showOnce,
       direction,
       animationDisabled,
       easingValues,
