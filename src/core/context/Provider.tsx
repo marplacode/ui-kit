@@ -1,4 +1,4 @@
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { BackgroundLoader } from "@components";
 import { useMotionControls } from "@hooks/useMotionControls";
 import { theme as defaultTheme } from "../theme";
@@ -39,7 +39,7 @@ export const UiKitProvider = ({
   }, [routerInstance?.asPath]);
 
   return (
-    <ChakraProvider theme={theme}>
+    <ChakraProvider theme={extendTheme(theme)}>
       <BackgroundLoader
         controls={controls}
         variation="sliding"

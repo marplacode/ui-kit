@@ -33,7 +33,7 @@ export const Image: FC<MarplaCommonComponent & ImageProps & any> = ({
   const { motionProps, rest } = getMotionProps(props);
   const { ref, size } = useCalculateNodeSize({ formatToPixels: true });
 
-  const { showInView } = motionProps;
+  const { showInView, showOnce } = motionProps;
   console.log("Image props", { motionProps, rest });
 
   console.log("show in view");
@@ -48,6 +48,7 @@ export const Image: FC<MarplaCommonComponent & ImageProps & any> = ({
             width={size.width}
             height={height}
             showInView={showInView}
+            showOnce={showOnce}
             {...motionProps}
           >
             {/* {shadow && <Box width={width} height={height} bg={`radial-gradient(circle, ${radialShadow.color1.color} ${radialShadow.color1.stength},${radialShadow.color2.color} ${radialShadow.color2.stength})`} /> } */}

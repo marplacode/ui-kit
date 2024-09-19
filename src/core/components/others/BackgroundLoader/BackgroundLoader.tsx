@@ -115,8 +115,11 @@ export const BackgroundLoader = forwardRef(
           show={isLoaded}
           disabled={disabled}
           zIndex={maxIndex}
-          onAnimationEnd={() =>
+          onAnimationEnd={() => {
+            controls.dispatch('onAnimationEnd')
             onAnimationEnd({ isLoaded, metadata: controls.metadata.current })
+          }
+            
           }
           {...props}
         />,

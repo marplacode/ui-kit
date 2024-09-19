@@ -50,7 +50,7 @@ export const MotionBox: FC<MotionBoxProps> = ({
     size: { width, height },
   } = useCalculateNodeSize({ formatToPixels: true });
   const visibleBoxRef = useRef(null)
-  const isInView = useIsInView(visibleBoxRef, { enabled: showInView, executeOnce: showOnce });
+  const isInView = useIsInView(visibleBoxRef, { enabled: showInView || showOnce, executeOnce: showOnce });
   const store:any = useUiKit();
   const globalTransitionConfig = store.config.transition
 

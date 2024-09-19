@@ -49,7 +49,7 @@
 // };
 import { useRef, useCallback, useState, useEffect } from "react";
 
-export const AVAILABLE_MOTION_STATES = ["show", "hide"];
+export const AVAILABLE_MOTION_STATES = ["show", "hide", "onAnimationEnd"];
 
 export const useMotionControls = () => {
   // const [metadata, setMetadata] = useState(null); // State to store metadata
@@ -57,6 +57,7 @@ export const useMotionControls = () => {
   const callbacksRef = useRef({
     show: [],
     hide: [],
+    onAnimationEnd: []
   });
 
   // // Initialize metadata when the hook is first used
@@ -100,5 +101,13 @@ export const useMotionControls = () => {
     callbacksRef.current.hide.forEach((callback) => callback(newMetadata));
   }, []);
 
-  return { show, hide, metadata, subscribe, unsubscribe };
+  // Trigger all callbacks for the show event
+  const dispatch = useCallback((eventName, newMetadata = null) => {
+    if(!callbacksRef.current[eventName]) throw new Error(`Event ${eventName} not found, maybe you forget to subscribe it`)
+
+    metadata.current = newMetadata ?? metadata.current
+    callbacksRef.current[eventName].forEach((callback) => callback(newMetadata));
+  }, []);
+
+  return { show, hide, metadata, subscribe, unsubscribe, dispatch };
 };
