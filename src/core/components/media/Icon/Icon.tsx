@@ -39,7 +39,6 @@ export const Icon: FC<IconProps> = ({
   href = "",
   ...props
 }) => {
-
   // Validate the colors before rendering
   if (initialEndColor !== undefined) {
     if (!isValidHexColor(color) || !isValidHexColor(initialEndColor)) {
@@ -59,57 +58,54 @@ export const Icon: FC<IconProps> = ({
   const endColor = initialEndColor ?? color;
   const show = reset ? reset : isHovered || motionProps?.show;
 
-
   return (
     <Box cursor="pointer" ref={ref} w={size.width} h={size.height}>
-      <StaggerBox stackDirection="stack" show={show}>
-        <MotionBox
-          {...motionProps}
-          easingValues={CUBIC_MOTION_FUNCTION_2}
-          duration={0.3}
-          direction={isHovered ? "right" : "right"}
-          show={show}
-        >
-          <AnimatedLink
-            width={"100%"}
-            cursor="pointer"
-            initial={{ color }}
-            animate={{ color: isHovered ? color : endColor }}
-            transition={{
-              duration: 0.5,
-              ease: EASING_VALUES_1,
-              delay: colorDelay,
-            }}
-            href={href}
-            target={target}
+      <AnimatedLink href={href} target={target}>
+        <StaggerBox stackDirection="stack" show={show}>
+          <MotionBox
+            {...motionProps}
+            easingValues={CUBIC_MOTION_FUNCTION_2}
+            duration={0.3}
+            direction={isHovered ? "right" : "right"}
+            show={show}
           >
-            <Box ref={sizeRef}>{<Icon {...rest} />}</Box>
-          </AnimatedLink>
-        </MotionBox>
+            <AnimatedLink
+              width={"100%"}
+              cursor="pointer"
+              initial={{ color }}
+              animate={{ color: isHovered ? color : endColor }}
+              transition={{
+                duration: 0.5,
+                ease: EASING_VALUES_1,
+                delay: colorDelay,
+              }}
+            >
+              <Box ref={sizeRef}>{<Icon {...rest} />}</Box>
+            </AnimatedLink>
+          </MotionBox>
 
-        <MotionBox
-          {...motionProps}
-          easingValues={CUBIC_MOTION_FUNCTION_2}
-          duration={0.3}
-          direction={isHovered ? "left" : "right"}
-          show={isHovered}
-        >
-          <AnimatedLink
-            width={"100%"}
-            cursor="pointer"
-            initial={{ color: "white" }}
-            transition={{
-              duration: 0.5,
-              ease: EASING_VALUES_1,
-              delay: colorDelay,
-            }}
-            href={href}
-            target={target}
+          <MotionBox
+            {...motionProps}
+            easingValues={CUBIC_MOTION_FUNCTION_2}
+            duration={0.3}
+            direction={isHovered ? "left" : "right"}
+            show={isHovered}
           >
-            {<Icon {...rest} />}
-          </AnimatedLink>
-        </MotionBox>
-      </StaggerBox>
+            <AnimatedLink
+              width={"100%"}
+              cursor="pointer"
+              initial={{ color: "white" }}
+              transition={{
+                duration: 0.5,
+                ease: EASING_VALUES_1,
+                delay: colorDelay,
+              }}
+            >
+              {<Icon {...rest} />}
+            </AnimatedLink>
+          </MotionBox>
+        </StaggerBox>
+      </AnimatedLink>
     </Box>
   );
 };

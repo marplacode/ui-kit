@@ -3167,6 +3167,7 @@ __metadata:
     glob: ^11.0.0
     react: ^18.1.0
     react-dom: ^18.1.0
+    react-icons: ^5.3.0
     storybook: ^8.2.7
     typescript: ^5.2.2
     vite: ^5.3.1
@@ -8797,6 +8798,15 @@ __metadata:
     "@types/react":
       optional: true
   checksum: f95c575a904a4ccf0c856c0fdbb8614dd99edd6bd124932a25c62285c6e5374586d762f5ba9ac3b1a1b865e93e6c32ca7dee273a0b336ad112becf91150391c6
+  languageName: node
+  linkType: hard
+
+"react-icons@npm:^5.3.0":
+  version: 5.3.0
+  resolution: "react-icons@npm:5.3.0"
+  peerDependencies:
+    react: "*"
+  checksum: 3aa5f50e05aafc6d31e0d995fe0d98560069aa88717b24ce8aaa082a7e7b20ca95e1e19d847ed6e52d658a5a30e15826af20d7554bf993a743edd55586db62e3
   languageName: node
   linkType: hard
 

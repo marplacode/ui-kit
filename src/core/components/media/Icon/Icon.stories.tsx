@@ -5,7 +5,6 @@ import { Box, HStack, VStack } from "@chakra-ui/react";
 import { StaggerBox } from "../../foundations/StaggerBox";
 import React from "react";
 
-console.log("ICONN", FaInstagram());
 const Scene = (props: any) => {
   console.log("sdas", props);
   return (
