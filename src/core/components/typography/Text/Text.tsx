@@ -25,6 +25,7 @@ export const Text = ({
   easingValues = CUBIC_MOTION_FUNCTION_1,
   letterSpacing = "0rem",
   onRenderLetter = undefined,
+  // golden rule 35 - 45 per paragraph
   wordsPerParagraph = undefined,
   color,
   endColor,

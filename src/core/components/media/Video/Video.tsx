@@ -4,6 +4,7 @@ import { MarplaCommonComponent } from "@commonTypes/MarplaCommonComponent";
 import { FC, useEffect, useRef } from "react";
 import { getMotionProps } from "@utils/getMotionProps";
 import { useCalculateNodeSize } from "@hooks/useCalculateNodeSize";
+import { useIsInView } from "@hooks/useIsInView";
 
 export const Video: FC<MarplaCommonComponent & any> = ({
   width,
@@ -14,6 +15,7 @@ export const Video: FC<MarplaCommonComponent & any> = ({
   loop = true,
   startTime,
   endTime,
+  autoPlay: initAutoPlay = true,
   // playbackrate
   // 1.0 is normal speed
   // 0.5 is half speed (slower)
@@ -23,8 +25,15 @@ export const Video: FC<MarplaCommonComponent & any> = ({
 }) => {
   const { motionProps, rest } = getMotionProps(props);
   const { ref: sizeRef, size } = useCalculateNodeSize({ formatToPixels: true });
+  const isInView = useIsInView(sizeRef, {
+    enabled: motionProps.showInView,
+    executeOnce: motionProps.showOnce,
+  });
+  const autoPlay =
+    motionProps.showInView || motionProps.showOnce ? false : initAutoPlay;
   const ref: any = useRef(null);
 
+  // Handle start and end time/ loop
   useEffect(() => {
     const videoElement = ref.current;
 
@@ -44,18 +53,29 @@ export const Video: FC<MarplaCommonComponent & any> = ({
       }
     };
 
-    videoElement.currentTime = startTime;
-    videoElement.addEventListener("timeupdate", handleTimeUpdate);
-    videoElement.play();
+    const playVideo = () => {
+      videoElement.currentTime = startTime;
+      videoElement.addEventListener("timeupdate", handleTimeUpdate);
+      videoElement.play();
+    };
+
+    // if showInView is provided validate that isInView 
+    if (motionProps.showInView || (motionProps.showOnce && !autoPlay)) {
+      if (isInView) {
+        playVideo();
+      }
+    } else {
+      playVideo();
+    }
 
     return () => {
       videoElement.removeEventListener("timeupdate", handleTimeUpdate);
     };
-  }, [startTime, endTime, ref.current]);
+  }, [startTime, endTime, motionProps, autoPlay, isInView, ref.current]);
 
   return (
     <Box w={"100%"}>
-    {/* Override ChakraUI global mediaquery */}
+      {/* Override ChakraUI global mediaquery */}
       <style>
         {`
           :where(video) {
@@ -72,7 +92,7 @@ export const Video: FC<MarplaCommonComponent & any> = ({
             <Box width={size.width} height={height}>
               <video
                 loop={loop}
-                autoPlay
+                autoPlay={autoPlay}
                 muted
                 preload="auto"
                 playsInline

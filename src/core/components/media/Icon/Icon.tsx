@@ -5,12 +5,10 @@ import { Box } from "@chakra-ui/react";
 import { FC, useEffect, useState } from "react";
 import { useHover } from "@hooks/useHover";
 import {
-  CUBIC_MOTION_FUNCTION_1,
   CUBIC_MOTION_FUNCTION_2,
   EASING_VALUES_1,
 } from "@config/definitions";
 import { motion } from "framer-motion";
-import { useDebounce } from "@hooks/useDebounce";
 import { MarplaCommonComponent } from "@commonTypes/MarplaCommonComponent";
 
 interface IconProps extends MarplaCommonComponent {
