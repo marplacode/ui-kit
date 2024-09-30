@@ -48,7 +48,7 @@ export function modifyMaterial(
   material.needsUpdate = true;
 }
 
-type MaterialSurfaceType = 'metal' | 'wood' | 'glass' | 'ceramic' | 'plastic' | 'wood' | 'chrome' | 'rubber' | 'ceramic'
+type MaterialSurfaceType = 'metal' | 'wood' | 'glass' | 'ceramic' | 'plastic' | 'wood' | 'chrome' | 'rubber' | 'ceramic' | 'mate' | 'shiny'
 // Predefined material surface configurations
 export const materialConfigs: Record<MaterialSurfaceType, MaterialConfig> = {
   metal: {
@@ -114,4 +114,20 @@ export const materialConfigs: Record<MaterialSurfaceType, MaterialConfig> = {
     transparent: false,
     transmission: 0,
   },
+  mate:  {
+    roughness: 0.3, // High roughness for matte appearance
+    metalness: 0.3,   // No metallic reflection
+    color: 0xffffff, // Default to pure white color
+    envMapIntensity: 0.2, // No environmental reflections
+    transparent: false, // Opaque material
+    transmission: 0,   // No glass-like properties
+  },
+  shiny: {
+    roughness: 0.1, // Low roughness for a shiny surface
+    metalness: 1,   // High metallic reflection
+    color: 0xffffff, // Default to pure white color
+    envMapIntensity: 1.0, // Moderate environmental reflections
+    transparent: false, // Opaque material
+    transmission: 0,   // No glass-like properties
+  }
 };

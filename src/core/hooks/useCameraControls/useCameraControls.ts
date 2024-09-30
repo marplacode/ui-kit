@@ -1,29 +1,63 @@
-import { useRef, useCallback } from 'react'
+import { useRef, useCallback, useEffect } from 'react';
 
-function degToRad(degrees) {
-  return degrees * (Math.PI / 180);
+// Utility function to convert degrees to radians
+const degToRad = (deg: number) => (deg * Math.PI) / 180;
+
+interface CameraControlConfig {
+  rotation?: [number, number];   // Rotation as [x, y] angles in degrees
+  dollyDistance?: number;        // Distance for the dolly movement
+  target?: [number, number, number];  // Target position
 }
 
-export const useCameraControls = ({ config }) => {
-  const cameraControlsRef = useRef<any>()
+interface UseCameraControlsProps {
+  config?: CameraControlConfig;  // Optional config object
+}
 
+export const useCameraControls = ({ config }: UseCameraControlsProps) => {
+  const cameraControlsRef = useRef<any>();
+
+  // Function to move the camera
   const move = useCallback(
-    async ({ rotation, dollyDistance, target = [0,0,0],  }: any) => {
-      // await cameraControlsRef.current?.setOrbitPoint(23, 0, 0, true)
-      cameraControlsRef.current?.rotateTo(
-        degToRad(rotation[0]),
-        degToRad(rotation[1]),
-        true
-      )
-      cameraControlsRef.current?.dollyTo(dollyDistance, true)
-      await cameraControlsRef.current?.setTarget(...target, true)
+    async ({ rotation, dollyDistance, target = [0, 0, 0] }: any) => {
+      const finalRotation = config?.rotation || rotation;
+      const finalDollyDistance = config?.dollyDistance || dollyDistance;
+      const finalTarget = config?.target || target;
+
+      // Rotate camera using the provided or default rotation values
+      if (finalRotation) {
+        cameraControlsRef.current?.rotateTo(
+          degToRad(finalRotation[0]),
+          degToRad(finalRotation[1]),
+          true
+        );
+      }
+
+      // Dolly to the provided or default distance
+      if (finalDollyDistance) {
+        cameraControlsRef.current?.dollyTo(finalDollyDistance, true);
+      }
+
+      // Set target position using the provided or default target
+      await cameraControlsRef.current?.setTarget(...finalTarget, true);
     },
-    []
-  )
+    [config]
+  );
+
+  // Run move on the first mount
+  useEffect(() => {
+    const initialRotation = config?.rotation || [0, 0]; // Default rotation if not provided
+    const initialDollyDistance = config?.dollyDistance || 10; // Default distance
+    const initialTarget = config?.target || [0, 0, 0]; // Default target
+
+    move({
+      rotation: initialRotation,
+      dollyDistance: initialDollyDistance,
+      target: initialTarget
+    });
+  }, [config, move]);
 
   return {
     cameraControlsRef,
     move
-  }
-  
-}
+  };
+};
