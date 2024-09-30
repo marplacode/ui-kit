@@ -13,45 +13,45 @@ const Scene = (props: any) => {
     ? { controls, ...props }
     : props;
 
-  return (
-    <>
-      {/* <BackgroundLoader {...newProps} /> */}
-      <button onClick={() => { 
-        
-        router.push('ads')
-        // controls.show({essooo: '112312'})
-        
-        }}>SHOW</button>
-      <button
-        onClick={() => {
-          // controls.hide();
-          router.back()
-        }}
-      >
-        HIDE
-      </button>
-      <h1>MARPLACODE;</h1>
-    </>
-  );
-  // const imperativeControls = useRef(null);
-  // const newProps = props.imperative
-  //   ? { controlsRef: imperativeControls, ...props }
-  //   : props;
   // return (
   //   <>
-  //     <BackgroundLoader {...newProps} />
-  //     <button onClick={() => imperativeControls.current.show()}>SHOW</button>
+  //     {/* <BackgroundLoader {...newProps} /> */}
+  //     {/* <button onClick={() => { 
+        
+  //       router.push('ads')
+  //       // controls.show({essooo: '112312'})
+        
+  //       }}>SHOW</button>
   //     <button
   //       onClick={() => {
-  //         imperativeControls.current.hide();
-  //         console.log(imperativeControls.current);
+  //         // controls.hide();
+  //         router.back()
   //       }}
   //     >
   //       HIDE
   //     </button>
-  //     <h1>MARPLACODE;</h1>
+  //     <h1>MARPLACODE;</h1> */}
   //   </>
   // );
+  const imperativeControls = useRef(null);
+  // const newProps = props.imperative
+  //   ? { controlsRef: imperativeControls, ...props }
+  //   : props;
+  return (
+    <>
+      <BackgroundLoader {...props} />
+      {/* <button onClick={() => imperativeControls.current.show()}>SHOW</button>
+      <button
+        onClick={() => {
+          imperativeControls.current.hide();
+          console.log(imperativeControls.current);
+        }}
+      >
+        HIDE
+      </button>
+      <h1>MARPLACODE;</h1> */}
+    </>
+  );
 };
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
