@@ -34,9 +34,8 @@ export const Image: FC<MarplaCommonComponent & ImageProps & any> = ({
   const { ref, size } = useCalculateNodeSize({ formatToPixels: true });
 
   const { showInView, showOnce } = motionProps;
-  console.log("Image props", { motionProps, rest });
 
-  console.log("show in view");
+
   return (
     <Box width={'100%'}>
       {/* DUMB COMPONENT TO CALCULATE WIDTH */}

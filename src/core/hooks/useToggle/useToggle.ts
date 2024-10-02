@@ -9,8 +9,8 @@ export const useToggle = (initialState = false) => {
     const [isToggled, setState] = useState(initialState);
   
     const toggle = useCallback(() => {
-      setState(prevState => !prevState);
-    }, []);
+      setState(!isToggled);
+    }, [isToggled]);
   
     return { isToggled, toggle };
   };

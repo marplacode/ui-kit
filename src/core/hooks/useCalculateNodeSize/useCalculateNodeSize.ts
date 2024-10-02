@@ -11,7 +11,6 @@ export const useCalculateNodeSize = ({ initialRef = null, formatToPixels = false
 
     if (node) {
       const updateSize = (entries) => {
-        console.log('update',entries)
         if (!entries || entries.length === 0) return;
         const { width, height } = entries[0].contentRect;
         setDimensions({

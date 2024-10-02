@@ -48,7 +48,19 @@ export function modifyMaterial(
   material.needsUpdate = true;
 }
 
-type MaterialSurfaceType = 'metal' | 'wood' | 'glass' | 'ceramic' | 'plastic' | 'wood' | 'chrome' | 'rubber' | 'ceramic' | 'mate' | 'shiny'
+type MaterialSurfaceType =
+  | "metal"
+  | "wood"
+  | "glass"
+  | "ceramic"
+  | "plastic"
+  | "wood"
+  | "chrome"
+  | "rubber"
+  | "ceramic"
+  | "mate"
+  | "shiny"
+  | "deckShine";
 // Predefined material surface configurations
 export const materialConfigs: Record<MaterialSurfaceType, MaterialConfig> = {
   metal: {
@@ -114,20 +126,29 @@ export const materialConfigs: Record<MaterialSurfaceType, MaterialConfig> = {
     transparent: false,
     transmission: 0,
   },
-  mate:  {
+  mate: {
     roughness: 0.3, // High roughness for matte appearance
-    metalness: 0.3,   // No metallic reflection
+    metalness: 0.3, // No metallic reflection
     color: 0xffffff, // Default to pure white color
     envMapIntensity: 0.2, // No environmental reflections
     transparent: false, // Opaque material
-    transmission: 0,   // No glass-like properties
+    transmission: 0, // No glass-like properties
   },
   shiny: {
     roughness: 0.1, // Low roughness for a shiny surface
-    metalness: 1,   // High metallic reflection
+    metalness: 1, // High metallic reflection
     color: 0xffffff, // Default to pure white color
     envMapIntensity: 1.0, // Moderate environmental reflections
     transparent: false, // Opaque material
-    transmission: 0,   // No glass-like properties
-  }
+    transmission: 0, // No glass-like properties
+  },
+  deckShine: {
+    roughness: 0.05,
+    metalness: 1.0, // High reflectivity
+    color: 0xffffff, // Pure white base color, no tint
+    envMapIntensity: 1.5, // Enhance environmental reflections
+    // Remove transparency if you only want reflections
+    transparent: false,
+    transmission: 0, // Disable light transmission (no glass-like transparency)
+  },
 };

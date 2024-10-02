@@ -7,14 +7,17 @@ interface CameraControlConfig {
   rotation?: [number, number];   // Rotation as [x, y] angles in degrees
   dollyDistance?: number;        // Distance for the dolly movement
   target?: [number, number, number];  // Target position
+  ref?: null;
 }
 
-interface UseCameraControlsProps {
-  config?: CameraControlConfig;  // Optional config object
-}
+// interface UseCameraControlsProps {
+//   config?: CameraControlConfig;  // Optional config object
+// }
 
-export const useCameraControls = ({ config }: UseCameraControlsProps) => {
-  const cameraControlsRef = useRef<any>();
+export const useCameraControls = (config: CameraControlConfig) => {
+  const internalRef = useRef<any>();
+  const cameraControlsRef = config?.ref  || internalRef
+
 
   // Function to move the camera
   const move = useCallback(
