@@ -8,12 +8,13 @@ import {
 import { useSpring, config as springConfig } from 'react-spring'
 import { useState } from 'react'
 
-export const Slider = ({ autoMove, moveTo = 70, value, ...rest }) => {
+export const Slider = ({ autoMove, moveTo = 20, value, defaultValue = 0, delay = 0, ...rest }) => {
   // auto animate slider
   const [isAutoMove, setIsAutoMove] = useState(false)
   const { value: springValue } = useSpring({
-    value: autoMove ? moveTo : 0,
+    value: autoMove ? moveTo : defaultValue,
     config: springConfig.slow,
+    delay: delay * 1000,
     onChange: ({ value }) => {
       rest.onChange(value.value)
     },
@@ -30,7 +31,7 @@ export const Slider = ({ autoMove, moveTo = 70, value, ...rest }) => {
       <S
         aria-label='slider-animation'
         w='40'
-        defaultValue={0}
+        defaultValue={defaultValue}
         color='white'
         colorScheme='whiteAlpha'
         step={5}
