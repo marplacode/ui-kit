@@ -10,10 +10,6 @@ interface CameraControlConfig {
   ref?: null;
 }
 
-// interface UseCameraControlsProps {
-//   config?: CameraControlConfig;  // Optional config object
-// }
-
 export const useCameraControls = (config: CameraControlConfig) => {
   const internalRef = useRef<any>();
   const cameraControlsRef = config?.ref  || internalRef
@@ -45,19 +41,6 @@ export const useCameraControls = (config: CameraControlConfig) => {
     },
     [config]
   );
-
-  // Run move on the first mount
-  useEffect(() => {
-    const initialRotation = config?.rotation || [0, 0]; // Default rotation if not provided
-    const initialDollyDistance = config?.dollyDistance || 10; // Default distance
-    const initialTarget = config?.target || [0, 0, 0]; // Default target
-
-    move({
-      rotation: initialRotation,
-      dollyDistance: initialDollyDistance,
-      target: initialTarget
-    });
-  }, [config, move]);
 
   return {
     cameraControlsRef,
