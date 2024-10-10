@@ -22,6 +22,8 @@ export const StaggerBox = forwardRef<any, any>(
       textAlign,
       flexWrap,
       spacing = 0,
+      width = null,
+      alignItems = null,
       ...props
     },
     initialRef
@@ -73,6 +75,8 @@ export const StaggerBox = forwardRef<any, any>(
         textAlign={textAlign}
         flexWrap={flexWrap}
         ref={ref}
+        width={width ?? null}
+        alignItems={alignItems}
       >
         {children.map((child, index) => (
           <MotionBox

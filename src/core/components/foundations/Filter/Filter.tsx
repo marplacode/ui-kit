@@ -20,7 +20,7 @@ const DEFAULT_GRADIENT_CONFIG = {
 };
 
 const getGradientType = (type, incomingConfig = DEFAULT_GRADIENT_CONFIG) => {
-  const config = { ...DEFAULT_GRADIENT_CONFIG, ...incomingConfig }
+  const config = { ...DEFAULT_GRADIENT_CONFIG, ...incomingConfig };
   const gradients = {
     linear: `linear-gradient(${config.direction}, ${config.color1}, ${config.color2})`,
     radial: `radial-gradient(${config.color1}, ${config.color2})`,
@@ -46,7 +46,7 @@ const effects = {
 };
 
 const effectLayers: any = {
-  blur: ({config }) => (
+  blur: ({ config }) => (
     <Box
       position="absolute"
       w="100%"
@@ -56,13 +56,16 @@ const effectLayers: any = {
       // bg={getGradientType(config.gradient.type, config.gradient ?? DEFAULT_GRADIENT_CONFIG)}
     />
   ),
-  "linear-gradient": ({config }) => (
+  "linear-gradient": ({ config }) => (
     <Box
       position="absolute"
       w="100%"
       h="100%"
       top="0"
-      bg={getGradientType(config.gradient.type, config.gradient ?? DEFAULT_GRADIENT_CONFIG)}
+      bg={getGradientType(
+        config.gradient.type,
+        config.gradient ?? DEFAULT_GRADIENT_CONFIG
+      )}
     />
   ),
 };
@@ -172,7 +175,10 @@ export const Filter: FC<FilterComponentProps & any> = ({
     );
   }
 
-  const finalShape: any = shapes[shape] || "none";
+  // const finalShape: any =
+  //   shapes[shape] || shape.includes("url") ? `url(${shape})` : "none";
+  const finalShape: any =
+    shapes[shape] ||  shape || "none";
 
   const [fake, setFake] = useState(false);
   useEffect(() => {
@@ -190,9 +196,7 @@ export const Filter: FC<FilterComponentProps & any> = ({
       {...props}
     >
       {children}
-      {enabledEffects.map((name) =>
-        effectLayers[name]({ config })
-      )}
+      {enabledEffects.map((name) => effectLayers[name]({ config }))}
     </Box>
   );
 };
