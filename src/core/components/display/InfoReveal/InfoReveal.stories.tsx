@@ -8,6 +8,8 @@ const Scene = (props: any) => {
   
   return (
     <VStack w="100%" color="black">
+
+      <Box borderRadius={'30px'} bg="black" opacity={'0.5'}>  
       <InfoReveal
           label="Upload your design"
           icon="images/upload_icon.svg"
@@ -16,7 +18,7 @@ const Scene = (props: any) => {
         >
           <Box bg="red" w="20" h="20" />
         </InfoReveal>
-
+        </Box>
     </VStack>
   );
 };

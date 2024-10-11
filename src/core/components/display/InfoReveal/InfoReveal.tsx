@@ -2,6 +2,7 @@ import { VStack } from "@chakra-ui/react";
 import { MotionBoxProps } from "@commonTypes/HiddenBox";
 import { ArrowButton, HLine } from "@components";
 import { StaggerBox, MotionBox, Box, Image, Text } from "@components";
+import { useCalculateNodeSize } from "@hooks/useCalculateNodeSize";
 import { useToggle } from "@hooks/useToggle";
 import { PropsWithChildren, FC } from "react";
 import { HDStack } from "../../layout/HDStack";
@@ -10,6 +11,7 @@ export interface InfoRevealProps extends PropsWithChildren, MotionBoxProps {
   icon: string;
   label: string;
   contentEnabled?: boolean;
+  arrowOrientation?: string;
   onClick?: () => void;
   onChange?: () => void;
 }
@@ -19,15 +21,18 @@ export const InfoReveal: FC<InfoRevealProps> = ({
   label,
   show,
   contentEnabled = true,
+  arrowOrientation = "down",
   children,
   onChange,
   onClick,
 }) => {
-  const { toggle: toggleContent, value: showContent } = useToggle();
-
+  const { toggle: toggleContent, value: showContent } = useToggle(show);
+  const { ref: contentRef, size } = useCalculateNodeSize({
+    formatToPixels: true,
+  });
   const openContent = () => {
     if (contentEnabled) {
-      return toggleContent();
+      toggleContent();
     }
     onClick();
   };
@@ -38,7 +43,7 @@ export const InfoReveal: FC<InfoRevealProps> = ({
         w="100%"
         alignItems={"space-between"}
         onClick={() => openContent()}
-        cursor={ contentEnabled ? "pointer" : 'auto'}
+        cursor={"pointer"}
       >
         <HDStack w="100%" justifyContent="space-between">
           <HDStack>
@@ -49,13 +54,25 @@ export const InfoReveal: FC<InfoRevealProps> = ({
               {label}
             </Text>
           </HDStack>
-          <ArrowButton show={showContent} delay={1.6} size="6" />
+          <ArrowButton
+            show={!!showContent}
+            delay={1.6}
+            size="6"
+            orientation={arrowOrientation}
+          />
         </HDStack>
       </VStack>
 
       <HLine show={show} delay={0.8} />
-      {/* TODO change this for unmounting wit animation */}
-      {showContent && <MotionBox show={showContent}>{children}</MotionBox>}
+      <Box
+        h={showContent ? size.height : 0}
+        w="100%"
+        transition="all 1s cubic-bezier(0.37, 0.23, 0, 1.01)"
+      >
+        <Box ref={contentRef}>
+          <MotionBox show={showContent}>{children}</MotionBox>
+        </Box>
+      </Box>
     </VStack>
   );
 };
