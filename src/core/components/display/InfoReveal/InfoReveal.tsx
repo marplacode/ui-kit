@@ -24,7 +24,7 @@ export const InfoReveal: FC<InfoRevealProps> = ({
   arrowOrientation = "down",
   children,
   onChange,
-  onClick,
+  onClick = () =>{},
 }) => {
   const { toggle: toggleContent, value: showContent } = useToggle(show);
   const { ref: contentRef, size } = useCalculateNodeSize({
@@ -64,15 +64,15 @@ export const InfoReveal: FC<InfoRevealProps> = ({
       </VStack>
 
       <HLine show={show} delay={0.8} />
-      <Box
+      <VStack
         h={showContent ? size.height : 0}
         w="100%"
         transition="all 1s cubic-bezier(0.37, 0.23, 0, 1.01)"
       >
-        <Box ref={contentRef}>
+        <VStack w="100%" ref={contentRef}>
           <MotionBox show={showContent}>{children}</MotionBox>
-        </Box>
-      </Box>
+        </VStack>
+      </VStack>
     </VStack>
   );
 };
