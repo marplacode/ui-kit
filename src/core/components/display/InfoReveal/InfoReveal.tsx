@@ -4,7 +4,7 @@ import { ArrowButton, HLine } from "@components";
 import { StaggerBox, MotionBox, Box, Image, Text } from "@components";
 import { useCalculateNodeSize } from "@hooks/useCalculateNodeSize";
 import { useToggle } from "@hooks/useToggle";
-import { PropsWithChildren, FC } from "react";
+import { PropsWithChildren, FC, useState } from "react";
 import { HDStack } from "../../layout/HDStack";
 
 export interface InfoRevealProps extends PropsWithChildren, MotionBoxProps {
@@ -26,6 +26,7 @@ export const InfoReveal: FC<InfoRevealProps> = ({
   onChange,
   onClick = () =>{},
 }) => {
+  const [initialShow,]= useState(show)
   const { toggle: toggleContent, value: showContent } = useToggle(show);
   const { ref: contentRef, size } = useCalculateNodeSize({
     formatToPixels: true,
@@ -48,9 +49,9 @@ export const InfoReveal: FC<InfoRevealProps> = ({
         <HDStack w="100%" justifyContent="space-between">
           <HDStack>
             <Box w="20px">
-              <Image show={show} delay={1.2} src={icon} />
+              <Image show={initialShow} delay={1.2} src={icon} />
             </Box>
-            <Text show={show} delay={1.4} fontWeight="600" color="#FFF">
+            <Text show={initialShow} delay={1.4} fontWeight="600" color="#FFF">
               {label}
             </Text>
           </HDStack>
@@ -63,13 +64,16 @@ export const InfoReveal: FC<InfoRevealProps> = ({
         </HDStack>
       </VStack>
 
-      <HLine show={show} delay={0.8} />
+      <HLine show={initialShow} delay={0.8} />
       <VStack
         h={showContent ? size.height : 0}
         w="100%"
         transition="all 1s cubic-bezier(0.37, 0.23, 0, 1.01)"
       >
-        <VStack w="100%" ref={contentRef}>
+        <VStack 
+        w="100%" 
+        ref={contentRef}
+        >
           <MotionBox show={showContent}>{children}</MotionBox>
         </VStack>
       </VStack>
