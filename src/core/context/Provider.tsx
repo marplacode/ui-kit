@@ -9,6 +9,8 @@ export const UiKitProvider = ({
   theme = defaultTheme,
   config = null,
   router: routerInstance = null,
+  pathname = null,
+  loaderConfig,
   children,
 }) => {
   const controls = useMotionControls();
@@ -33,10 +35,11 @@ export const UiKitProvider = ({
   }, [initRouter, routerInstance]);
 
   useEffect(() => {
-    if (routerInstance?.asPath) {
+    // Next 13 removed asPath property
+    if (routerInstance?.asPath || pathname) {
       controls.hide();
     }
-  }, [routerInstance?.asPath]);
+  }, [routerInstance?.asPath, pathname]);
 
   return (
     <ChakraProvider theme={extendTheme(theme)}>
@@ -53,6 +56,7 @@ export const UiKitProvider = ({
             routerInstance.push(metadata.url);
           }
         }}
+        {...loaderConfig}
       />
       {children}
     </ChakraProvider>

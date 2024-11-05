@@ -92,10 +92,8 @@ export const BackgroundLoader = forwardRef(
     }, [show]);
 
     useEffect(() => {
-      console.log('controls 11',controls)
       if (!controls) return () => {};
       controls.subscribe("show", () => {
-        console.log('SHOOOOWWWWWW')
         setIsLoaded(false);
       });
       controls.subscribe("hide", () => {

@@ -8,7 +8,6 @@ export const SlidingSideVariation = ({
   disabled = false,
   ...props
 }: any) => {
-  console.log('FINAL',disabled)
   const { primaryColor, secondaryColor } = props;
 
   const getTransform = (loaded, dir, part) => {
