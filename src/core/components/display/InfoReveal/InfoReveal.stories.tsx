@@ -1,24 +1,67 @@
-
 import React, { useState } from "react";
 import { HDStack } from "../../layout/HDStack";
 import { Box, VStack } from "@chakra-ui/react";
 import { InfoReveal } from "./InfoReveal";
 
 const Scene = (props: any) => {
-  
+  if (props.direction === "stacked") return <Scene2 />;
+
   return (
     <VStack w="100%" color="black">
-
-      <Box borderRadius={'30px'} bg="black" opacity={'0.5'}>  
-      <InfoReveal
+      <Box borderRadius={"30px"} bg="black" opacity={"0.5"}>
+        <InfoReveal
           label="Upload your design"
           icon="images/upload_icon.svg"
           show={props.show}
-          onClick={()=> console.log('ASDDAS')}
+          // onClick={()=> console.log('ASDDAS')}
         >
           <Box bg="red" w="20" h="20" />
         </InfoReveal>
-        </Box>
+      </Box>
+    </VStack>
+  );
+};
+
+const Scene2 = (props: any) => {
+  return (
+    <VStack
+      w="100%"
+      spacing={4}
+      color="black"
+      borderRadius={"30px"}
+      bg="black"
+      opacity={"0.5"}
+      p="10"
+    >
+      <InfoReveal
+        label="Upload your design"
+        icon="images/upload_icon.svg"
+        show={props.show}
+        // onClick={()=> console.log('ASDDAS')}
+      >
+        <Box bg="red" w="20" h="120px" />
+      </InfoReveal>
+
+      <InfoReveal
+        label="Upload your design"
+        icon="images/upload_icon.svg"
+        show={props.show}
+        // onClick={()=> console.log('ASDDAS')}
+      >
+        <Box bg="green" w="20" h="40px" />
+      </InfoReveal>
+
+      <InfoReveal
+        label="Upload your design"
+        icon="images/upload_icon.svg"
+        show={props.show}
+        // onClick={()=> console.log('ASDDAS')}
+      >
+        <VStack>
+        <Box bg="blue" w="20" h="200px" />
+        <Box bg="yellow" w="20" h="10px" />
+        </VStack>
+      </InfoReveal>
     </VStack>
   );
 };
@@ -47,8 +90,15 @@ export default meta;
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Default: any = {
   args: {
-    
-    show:true,
-    direction: 'column',
+    show: true,
+    direction: "column",
+  },
+};
+
+// More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
+export const Stacked: any = {
+  args: {
+    show: true,
+    direction: "stacked",
   },
 };

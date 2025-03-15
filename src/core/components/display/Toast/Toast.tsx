@@ -13,6 +13,8 @@ export interface ToastProps extends PropsWithChildren, MotionBoxProps {
   isClosable?: boolean;
   duration?: number;
   iconSize?: number;
+  titleProps,
+  descriptionProps,
 }
 
 export const Toast: FC<ToastProps> = ({
@@ -22,6 +24,8 @@ export const Toast: FC<ToastProps> = ({
   description,
   duration = 4,
   show,
+  titleProps,
+  descriptionProps,
 }) => {
   const { toggle, value: showContent, on, off } = useToggle(show);
 
@@ -44,15 +48,15 @@ export const Toast: FC<ToastProps> = ({
         w="100%"
         spacing="4"
         backgroundColor="#ffffff47"
-        minW="360px"
+        maxW="360px"
         borderRadius="15px"
         p="6"
       >
         <VStack w="100%" spacing="0" alignItems={"space-between"}>
-          <Text show={showContent} delay={.6} fontWeight="600" color="#FFF">
+          <Text show={showContent} delay={.6} fontWeight="600" color="#FFF" {...titleProps}>
             {title}
           </Text>
-          <Text show={showContent} delay={.8} fontWeight="100" color="#FFF">
+          <Text show={showContent} delay={.8} fontWeight="100" color="#FFF" {...descriptionProps}>
             {description}
           </Text>
         </VStack>
