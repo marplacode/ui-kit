@@ -18,7 +18,7 @@ export const useDebounce = (callback, delay, dependencies = []) => {
       callbackRef.current(...args);
     };
 
-    const timeoutId = setTimeout(handler, delay);
+    const timeoutId = setTimeout(()=>handler(dependencies), delay);
 
     return () => {
       clearTimeout(timeoutId);
