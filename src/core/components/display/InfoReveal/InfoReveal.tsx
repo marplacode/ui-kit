@@ -107,7 +107,7 @@ export const InfoReveal: FC<InfoRevealProps> = ({
       </VStack>
 
     {/* CONTENT */}
-      <Box ref={contentRef}>{children}</Box>
+      <Box ref={contentRef} w="100%">{children}</Box>
     </VStack>
   );
 };

@@ -8,7 +8,11 @@ const Scene = (props: any) => {
     <HStack>
 
 <ResizeControl  onChange={(a)=> 
-console.log('onChange',a.rotation)
+{
+  console.log('onChange R ',a.rotation)
+  console.log('onChange P ',a.position)
+}
+
 // console.log('onChange',a.position)
   // console.log('onChange',a)
 
